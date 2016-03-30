@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#fbcd45</color>
+    <color name="colorPrimaryDark">#f6a844</color>
+    <color name="colorAccent">#f9af50</color>
+    <color name="main_bg">#f5f5f5</color>
+    <color name="btn_color_main_bg_normal">#fff78b00</color>
+    <color name="btn_color_main_bg_pressed">#ffdb8100</color>
+    <color name="white">#ffffffff</color>
+    <color name="main_bottom_text_bg_color">#767e89</color>
+    <color name="color_btn_normal_cbn2">#ffaaaaaa</color>
+    <color name="color_line_cl4">#ffe4e4e4</color>
+    <color name="color_line_cl5">#ffdfdfdf</color>
+    <color name="color_text_c10">#fff78b00</color>
+    <color name="color_text_c11">#ff1c865f</color>
+    <color name="color_text_c12">#ffb24537</color>
+    <color name="color_text_c13">#ff9b4421</color>
+    <color name="color_text_c14">#ff73580a</color>
+    <color name="color_text_c15">#fffff8e2</color>
+    <color name="color_text_c5">#73394042</color>
+    <color name="color_text_c6">#ff767e89</color>
+    <color name="transparent">#00000000</color>
+    <color name="holo_orange_light">#ffffbb33</color>
+    <color name="holo_orange_dark">#ffff8800</color>
+    <color name="color_text_c6_a20">#33767e89</color>
+    <color name="color_text_c7">#ff394042</color>
+    <color name="bg_top">#fbcd45</color>
+    <color name="actionbar_text_default">#ffaa4725</color>
+    <color name="actionbar_text_pressed">#405e2807</color>
+    <color name="menu_panel_divider">#99827364</color>
+    <color name="common_sub_item_bg_normal">#fff5f5f5</color>
+    <color name="nav_text_normal">#5c5e61</color>
+    <color name="nav_text_pressed">#DA4A3A</color>
+    <color name="red">#ffff0000</color>
+    <color name="bg_select_date">#f8f8f8</color>
+    <color name="green">#ff00ff00</color>
+</resources>

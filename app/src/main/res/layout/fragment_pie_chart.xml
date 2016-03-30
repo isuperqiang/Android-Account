@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_select_date"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            >
+
+            <ImageView
+                android:id="@+id/icon_expense_chart_left"
+                android:layout_width="28dp"
+                android:layout_height="24dp"
+                android:paddingBottom="2dp"
+                android:paddingRight="8dp"
+                android:paddingTop="2dp"
+                android:src="@mipmap/baobiao_zuo"/>
+
+            <TextView
+                android:id="@+id/label_expense_date_chart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3月01日-31日"
+                android:textSize="20sp"
+                />
+
+            <ImageView
+                android:id="@+id/icon_expense_chart_right"
+                android:layout_width="28dp"
+                android:layout_height="24dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="8dp"
+                android:paddingTop="2dp"
+                android:src="@mipmap/baobiao_you"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <lecho.lib.hellocharts.view.PieChartView
+                android:id="@+id/pie_chart"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <com.silence.account.view.NoScrollListView
+                android:id="@+id/list_expense_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:headerDividersEnabled="true"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

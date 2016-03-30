@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.silence.account.activity.RecordActivity">
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="4dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:layout_marginTop="4dp"-->
+    <!--android:gravity="center"-->
+    <!--android:orientation="horizontal"-->
+    <!-->-->
+
+    <!--<Button-->
+    <!--android:id="@+id/label_record_income"-->
+    <!--style="@style/btn_top_style"-->
+    <!--android:background="@drawable/btn_orange_normal"-->
+    <!--android:text="收入"/>-->
+
+    <!--<Button-->
+    <!--android:id="@+id/label_record_expense"-->
+    <!--style="@style/btn_top_style"-->
+    <!--android:background="@drawable/btn_orange_pressed"-->
+    <!--android:text="支出"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1dp"-->
+    <!--android:background="@android:color/darker_gray"-->
+    <!--/>-->
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/record_fragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="0dp"-->
+    <!--android:layout_weight="1"-->
+    <!-->-->
+
+    <!--</FrameLayout>-->
+
+    <com.astuetz.PagerSlidingTabStrip
+        android:id="@+id/record_tab_strip"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:pstsDividerColor="@color/transparent"
+        app:pstsDividerPadding="2dp"
+        app:pstsIndicatorColor="@color/holo_orange_light"
+        app:pstsIndicatorHeight="4dp"
+        app:pstsShouldExpand="true"
+        app:pstsTabBackground="@drawable/background_tab"
+        app:pstsUnderlineHeight="2dp"
+        app:selectedTabTextColor="@color/holo_orange_dark"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+</LinearLayout>

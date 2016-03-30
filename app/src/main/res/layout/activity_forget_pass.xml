@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/corner_rect_bg"
+                android:padding="@dimen/activity_horizontal_margin">
+
+    <com.silence.account.view.NormalEditText
+        android:id="@+id/forget_email"
+        style="@style/et_normal_style"
+        android:layout_alignParentTop="true"
+        android:hint="输入您要找回密码的邮箱"
+        android:inputType="textEmailAddress"
+        />
+
+    <Button
+        android:id="@+id/btn_pass_next"
+        style="@style/btn_normal_style"
+        android:layout_below="@id/forget_email"
+        android:text="下一步"
+        />
+</RelativeLayout>

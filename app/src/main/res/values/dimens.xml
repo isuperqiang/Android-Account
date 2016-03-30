@@ -1,0 +1,9 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="common_width_w20">10.0dip</dimen>
+    <dimen name="font_size_f28">18.0dip</dimen>
+    <dimen name="pie_chart_text1_size">20sp</dimen>
+    <dimen name="pie_chart_text2_size">28sp</dimen>
+</resources>

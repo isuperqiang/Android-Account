@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="horizontal"
+              android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/item_icon_chart_list"
+        android:layout_width="36sp"
+        android:layout_height="36sp"
+        android:src="@mipmap/icon_shouru_type_qita"/>
+
+    <TextView
+        android:id="@+id/item_label_category_chart_list"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingLeft="12sp"
+        android:text="淘宝商城"
+        android:textColor="@color/color_text_c7"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/item_label_percent_chart_list"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="90%"
+        android:textColor="@color/color_text_c7"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/item_label_amount_chart_list"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical|right"
+        android:paddingRight="12dp"
+        android:text="200.0"
+        android:textColor="@color/color_text_c7"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+</LinearLayout>

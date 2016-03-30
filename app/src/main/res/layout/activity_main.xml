@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.silence.account.activity.MainActivity">
+
+    <FrameLayout
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_gp_tab"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/radio_btn_detail"
+            style="@style/tab_menu_style"
+            android:drawableTop="@drawable/nav_btn_detail"
+            android:text="明细"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_btn_account"
+            style="@style/tab_menu_style"
+            android:drawableTop="@drawable/nav_btn_account"
+            android:text="账户"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_btn_chart"
+            style="@style/tab_menu_style"
+            android:drawableTop="@drawable/nav_btn_chart"
+            android:text="图表"
+            />
+
+        <RadioButton
+            android:id="@+id/radio_btn_me"
+            style="@style/tab_menu_style"
+            android:drawableTop="@drawable/nav_btn_me"
+            android:text="我的"
+            />
+    </RadioGroup>
+</LinearLayout>

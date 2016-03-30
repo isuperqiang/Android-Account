@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.silence.account.activity.NameActivity">
+
+    <com.silence.account.view.NormalEditText
+        android:id="@+id/et_modify_username"
+        style="@style/et_normal_style"
+        android:hint="用户名"
+       />
+    <Button
+        android:id="@+id/btn_modify_username"
+        style="@style/btn_normal_style"
+        android:layout_below="@id/et_modify_username"
+        android:text="完成"
+        />
+</RelativeLayout>

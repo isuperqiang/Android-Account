@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/common_sub_item_bg_normal"
+    android:orientation="vertical"
+    tools:context="com.silence.account.activity.UserActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_info_photo"
+        style="@style/me_ll_style">
+
+        <TextView
+            style="@style/info_text"
+            android:text="头像"
+            />
+
+        <com.silence.account.view.CircleImageView
+            android:id="@+id/iv_user_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/color_line_cl4"
+            app:civ_border_width="1dp"/>
+
+        <ImageView
+            style="@style/image_more"
+            android:layout_marginLeft="8dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_btn_normal_cbn2"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_info_name"
+        style="@style/me_ll_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/info_text"
+            android:text="昵称"
+            />
+
+        <TextView
+            android:id="@+id/info_username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="我是刘强"
+            android:textColor="@color/color_text_c6"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <ImageView
+            style="@style/image_more"
+            android:layout_marginLeft="8dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_btn_normal_cbn2"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_info_pass"
+        style="@style/me_ll_style"
+        android:layout_marginTop="0dp">
+
+        <TextView
+            style="@style/info_text"
+            android:text="修改密码"
+            />
+
+        <ImageView
+            style="@style/image_more"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_btn_normal_cbn2"
+        />
+
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_text_btn"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="18sp"
+        />
+</LinearLayout>

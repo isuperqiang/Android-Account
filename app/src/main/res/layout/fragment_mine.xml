@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/common_sub_item_bg_normal"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_me_user"
+        style="@style/me_ll_style"
+        >
+
+        <com.silence.account.view.CircleImageView
+            android:id="@+id/iv_user_photo"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"
+            android:src="@mipmap/ic_launcher"
+            app:civ_border_color="@color/color_line_cl4"
+            app:civ_border_width="1dp"/>
+
+        <TextView
+            android:id="@+id/me_username"
+            style="@style/me_text_style"
+            android:text="用户名"
+            />
+
+        <ImageView
+            style="@style/image_more"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_me_setting"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ico_setting"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="系统设置"/>
+
+        <ImageView
+            style="@style/image_more"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_me_reminder"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ico_clock"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="记账提醒"/>
+
+        <ImageView
+            style="@style/image_more"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_me_share"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ico_like"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="分享APP"/>
+
+        <ImageView
+            style="@style/image_more"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_me_about"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/ico_about"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="关于"/>
+
+        <ImageView
+            style="@style/image_more"
+            />
+
+    </LinearLayout>
+</LinearLayout>

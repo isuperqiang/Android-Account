@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <ImageView
+            android:id="@+id/icon_add_category"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/icon_shouru_type_qita"
+            />
+
+        <EditText
+            android:id="@+id/et_add_category"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_edit_text"
+            android:gravity="center_vertical"
+            android:hint="自定义输入名称"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:paddingLeft="8dp"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/grid_add_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_line_cl4"
+        android:gravity="center_horizontal"
+        android:numColumns="5"
+        />
+</LinearLayout>

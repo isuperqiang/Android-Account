@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.silence.account.activity.ForgetNextActivity">
+
+
+    <ImageView
+        android:id="@+id/iv_yes"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_yellow_yes"/>
+
+    <TextView
+        android:id="@+id/label_send_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_yes"
+        android:layout_marginTop="20dp"
+        android:lineSpacingExtra="2dp"
+        android:padding="4dp"
+        android:textColor="@color/color_text_c7"
+        android:textSize="16sp"
+        />
+
+    <Button
+        android:id="@+id/btn_validate"
+        style="@style/btn_normal_style"
+        android:layout_below="@id/label_send_email"
+        android:text="完成"
+        />
+
+    <TextView
+        android:id="@+id/label_hint_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:lineSpacingExtra="8dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:textColor="@color/color_text_c6"
+        android:textSize="16sp"/>
+</RelativeLayout>

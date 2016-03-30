@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="com.silence.account.activity.RegisterActivity">
+
+    <com.silence.account.view.NormalEditText
+        android:id="@+id/et_reg_username"
+        style="@style/et_normal_style"
+        android:layout_alignParentTop="true"
+        android:hint="请输入用户名"
+        android:inputType="text"
+        >
+
+        <requestFocus/>
+    </com.silence.account.view.NormalEditText>
+
+    <com.silence.account.view.NormalEditText
+        android:id="@+id/et_reg_email"
+        style="@style/et_normal_style"
+        android:layout_below="@id/et_reg_username"
+        android:hint="请输入邮箱"
+        android:inputType="textEmailAddress"
+        />
+
+    <com.silence.account.view.PasswordEditText
+        android:id="@+id/et_reg_pass"
+        style="@style/et_password_style"
+        android:layout_below="@id/et_reg_email"
+        />
+
+    <Button
+        android:id="@+id/btn_register"
+        style="@style/btn_normal_style"
+        android:layout_below="@id/et_reg_pass"
+        android:text="完成注册"
+        />
+
+</RelativeLayout>

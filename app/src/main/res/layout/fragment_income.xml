@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.silence.account.fragment.IncomeFragment">
+
+    <EditText
+        android:id="@+id/et_income"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_edit_text"
+        android:ems="10"
+        android:hint="0.0"
+        android:imeOptions="actionNext"
+        android:inputType="numberDecimal"
+        android:paddingLeft="8dp"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:textStyle="bold">
+
+        <requestFocus/>
+    </EditText>
+
+    <LinearLayout
+        android:id="@+id/ll_income_cat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_ll_state"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/icon_income_cat"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/icon_shouru_type_gongzi"
+            />
+
+        <TextView
+            android:id="@+id/label_income_cat"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:text="工资"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/label_income_time"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/tv_time_style"
+        android:gravity="center_vertical"
+        android:padding="8dp"
+        android:text="2012-12-8 12:12"
+        android:textSize="20sp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <EditText
+            android:id="@+id/et_income_note"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:hint="备注"
+            android:inputType="text"
+            android:lines="3"/>
+
+        <ImageView
+            android:id="@+id/icon_income_speak"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_vertical"
+            android:src="@mipmap/ic_voice"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_income_save"
+        style="@style/btn_normal_style"
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:text="保存"
+        />
+</LinearLayout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/item_category_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:src="@mipmap/icon_shouru_type_qita"/>
+
+    <ImageView
+        android:id="@+id/item_category_close"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignLeft="@id/item_category_icon"
+        android:layout_alignTop="@id/item_category_icon"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginTop="-6dp"
+        android:padding="4dp"
+        android:src="@mipmap/ic_close"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:id="@+id/item_category_label"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_category_icon"
+        android:layout_marginTop="4dp"
+        android:gravity="center_horizontal"
+        android:text="话费"
+        android:textSize="14sp"/>
+
+</RelativeLayout>

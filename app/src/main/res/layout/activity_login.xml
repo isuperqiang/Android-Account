@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:padding="@dimen/activity_horizontal_margin"
+    tools:context="com.silence.account.activity.LoginActivity">
+
+    <ImageView
+        android:id="@+id/logo_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="80dp"
+        android:src="@mipmap/icon_login"/>
+
+    <com.silence.account.view.NormalEditText
+        android:id="@+id/et_login_username"
+        style="@style/et_normal_style"
+        android:layout_below="@id/logo_login"
+        android:hint="用户名"
+        >
+
+        <requestFocus/>
+    </com.silence.account.view.NormalEditText>
+
+    <com.silence.account.view.PasswordEditText
+        android:id="@+id/et_login_pass"
+        style="@style/et_password_style"
+        android:layout_below="@id/et_login_username"
+        />
+
+    <Button
+        android:id="@+id/btn_login"
+        style="@style/btn_normal_style"
+        android:layout_below="@id/et_login_pass"
+        android:text="登录"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_login"
+        android:layout_marginTop="12.0dip"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/label_forget"
+            style="@style/label_login_small"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:paddingLeft="10dp"
+            android:text="找回密码"
+            />
+
+        <TextView
+            android:id="@+id/label_register"
+            style="@style/label_login_small"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:text="邮箱注册"
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

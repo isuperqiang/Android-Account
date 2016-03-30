@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/label_record_income"
+        style="@style/btn_top_style"
+        android:background="@drawable/btn_orange_normal"
+        android:text="收入"/>
+
+    <Button
+        android:id="@+id/label_record_expense"
+        style="@style/btn_top_style"
+        android:background="@drawable/btn_orange_pressed"
+        android:text="支出"/>
+</LinearLayout>
