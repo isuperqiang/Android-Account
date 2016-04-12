@@ -2,6 +2,7 @@ package com.silence.account.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -37,7 +38,8 @@ public class LoginActivity extends BaseActivity {
     EditText mEtLoginPass;
 
     @Override
-    public void initView() {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
     }
@@ -62,12 +64,15 @@ public class LoginActivity extends BaseActivity {
                                     @Override
                                     protected Void doInBackground(Void... params) {
                                         UserDao userDao = new UserDao(LoginActivity.this);
-                                        userDao.addUser(new User(user.getUsername(), user.getPicture()));
                                         User curUser = userDao.getCurrentUser(user.getUsername());
-                                        IncomeCatDao incomeCatDao = new IncomeCatDao(LoginActivity.this);
-                                        incomeCatDao.initIncomeCat(curUser);
-                                        ExpenseCatDao expenseCatDao = new ExpenseCatDao(LoginActivity.this);
-                                        expenseCatDao.initExpensesCat(curUser);
+                                        if (curUser == null) {
+                                            userDao.addUser(new User(user.getUsername(), user.getPicture()));
+                                            curUser = userDao.getCurrentUser(user.getUsername());
+                                            IncomeCatDao incomeCatDao = new IncomeCatDao(LoginActivity.this);
+                                            incomeCatDao.initIncomeCat(curUser);
+                                            ExpenseCatDao expenseCatDao = new ExpenseCatDao(LoginActivity.this);
+                                            expenseCatDao.initExpensesCat(curUser);
+                                        }
                                         if (user.getPicture() != null) {
                                             String cacheDownloadDir = BmobPro.getInstance(LoginActivity.this).
                                                     getCacheDownloadDir();

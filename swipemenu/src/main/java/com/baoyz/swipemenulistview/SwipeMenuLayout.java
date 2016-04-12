@@ -180,7 +180,6 @@ public class SwipeMenuLayout extends FrameLayout {
                 int dis = (int) (mDownX - event.getX());
                 if (state == STATE_OPEN) {
                     dis += mMenuView.getWidth() * mSwipeDirection;
-                    ;
                 }
                 swipe(dis);
                 break;

@@ -135,12 +135,8 @@ public class CustomViewPager extends ViewPager {
         float deltaX = x2 - x1;
         float deltaY = y2 - y1;
 
-        if (Math.abs(deltaX) > mTouchSlop &&
-                Math.abs(deltaX) > Math.abs(deltaY)) {
+        return Math.abs(deltaX) > mTouchSlop &&
+                Math.abs(deltaX) > Math.abs(deltaY);
 
-            return true;
-        }
-
-        return false;
     }
 }

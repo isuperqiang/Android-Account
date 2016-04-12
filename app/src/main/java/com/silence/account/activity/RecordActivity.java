@@ -6,8 +6,6 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
@@ -42,17 +40,14 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
     private ExpenseFragment mExpenseFragment;
 
     @Override
-    public void initView() {
-        setContentView(R.layout.activity_record);
-        ButterKnife.bind(this);
-        disPlayBack(true);
-        setActionTitle("记账");
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=");
+        setContentView(R.layout.activity_record);
+        ButterKnife.bind(this);
+        setTitle("记账");
+        showBackwardView(true);
+        showDivider(true);
+        SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=56de48c7");
         mFragmentManager = getSupportFragmentManager();
         Parcelable extra = getIntent().getParcelableExtra(Constant.RECORD);
         int index = 0;
@@ -79,27 +74,6 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_record, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        } else if (item.getItemId() == R.id.menu_item_save) {
-            if (mPagerRecord.getCurrentItem() == 1) {
-                mExpenseFragment.saveExpense();
-            } else {
-                mIncomeFragment.saveIncome();
-            }
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public void DisplayDialog(Date date) {
         SlideDateTimeListener listener = new SlideDateTimeListener() {
             @Override
@@ -123,10 +97,5 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
                 .setIndicatorColor(Color.parseColor("#f6a844"))
                 .build()
                 .show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 }

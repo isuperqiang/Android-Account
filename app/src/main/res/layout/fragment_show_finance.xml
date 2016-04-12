@@ -4,9 +4,20 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.baoyz.swipemenulistview.SwipeMenuListView
-        android:id="@+id/list_finance"
-        android:headerDividersEnabled="true"
+    <TextView
+        android:id="@android:id/empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="还没有记录哦~~"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        />
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:headerDividersEnabled="true"
+        />
 </LinearLayout>

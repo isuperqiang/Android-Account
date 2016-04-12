@@ -2,6 +2,7 @@ package com.silence.account.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,10 @@ import com.silence.account.dao.ExpenseDao;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.DateUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Date;
 
@@ -46,18 +51,6 @@ public class DetailFragment extends BaseFragment {
     TextView mTextMonthExpense;
     private IncomeDao mIncomeDao;
     private ExpenseDao mExpenseDao;
-    private static final int REQUEST_UPDATE = 0X1;
-    private boolean mIsUpdate;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (mIsUpdate) {
-            updateToday();
-            updateWeek();
-            updateMonth();
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,6 +96,12 @@ public class DetailFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
@@ -114,36 +113,42 @@ public class DetailFragment extends BaseFragment {
             case R.id.ll_detail_today: {
                 Intent intent = new Intent(getActivity(), ItemActivity.class);
                 intent.putExtra(Constant.TYPE_DATE, Constant.TYPE_TODAY);
-                startActivityForResult(intent, REQUEST_UPDATE);
+                startActivity(intent);
             }
             break;
             case R.id.ll_detail_week: {
                 Intent intent = new Intent(getActivity(), ItemActivity.class);
                 intent.putExtra(Constant.TYPE_DATE, Constant.TYPE_WEEK);
-                startActivityForResult(intent, REQUEST_UPDATE);
+                startActivity(intent);
             }
             break;
             case R.id.ll_detail_month: {
                 Intent intent = new Intent(getActivity(), ItemActivity.class);
                 intent.putExtra(Constant.TYPE_DATE, Constant.TYPE_MONTH);
-                startActivityForResult(intent, REQUEST_UPDATE);
+                startActivity(intent);
             }
             break;
             case R.id.btn_record: {
-                startActivityForResult(new Intent(getActivity(), RecordActivity.class), REQUEST_UPDATE);
+                startActivity(new Intent(getActivity(), RecordActivity.class));
             }
             break;
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_UPDATE) {
-            if (resultCode == Constant.RESULT_INSERT_FINANCE || resultCode == Constant.RESULT_REFRESH_FINANCE) {
-                mIsUpdate = true;
-            } else {
-                mIsUpdate = false;
-            }
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refreshUI(String message) {
+        if (TextUtils.equals(message, "income_inserted") || TextUtils.equals(message, "expense_updated")
+                || TextUtils.equals(message, "income_updated") || TextUtils.equals(message, "income_deleted")
+                || TextUtils.equals(message, "expense_deleted") || TextUtils.equals(message, "expense_inserted")) {
+            updateToday();
+            updateWeek();
+            updateMonth();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

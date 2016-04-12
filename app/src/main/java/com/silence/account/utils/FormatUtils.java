@@ -15,9 +15,4 @@ public class FormatUtils {
         DecimalFormat decimalFormat = new DecimalFormat(pattern);
         return Float.parseFloat(decimalFormat.format(value));
     }
-
-    public static float formatFloat(float value) {
-        DecimalFormat decimalFormat = new DecimalFormat("###.0");
-        return Float.parseFloat(decimalFormat.format(value));
-    }
 }

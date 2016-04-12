@@ -36,6 +36,7 @@ import com.silence.account.utils.DateUtils;
 import com.silence.account.utils.L;
 import com.silence.account.utils.T;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -88,7 +89,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
         if (context instanceof onTimePickListener) {
             mOnTimePickListener = (onTimePickListener) context;
         }
-        mContext = getActivity().getApplicationContext();
+        mContext = getActivity();
     }
 
     @Override
@@ -251,7 +252,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
         mOnTimePickListener = null;
     }
 
-    public void saveIncome() {
+    private void saveIncome() {
         String trim = mEtIncome.getText().toString().trim();
         float amount = Float.parseFloat(TextUtils.isEmpty(trim) ? "0" : trim);
         String note = mEtIncomeNote.getText().toString().trim();
@@ -261,18 +262,18 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
         if (!mIsUpdateIncome) {
             if (incomeDao.addIncome(mIncome)) {
                 T.showShort(mContext, "保存成功");
-                getActivity().setResult(Constant.RESULT_INSERT_FINANCE);
+                EventBus.getDefault().post("income_inserted");
                 getActivity().finish();
             } else {
                 T.showShort(mContext, "保存失败");
             }
         } else {
             if (incomeDao.updateIncome(mIncome)) {
-                T.showShort(mContext, "保存成功");
-                getActivity().setResult(Constant.RESULT_UPDATE_FINANCE);
+                T.showShort(mContext, "修改成功");
+                EventBus.getDefault().post("income_updated");
                 getActivity().finish();
             } else {
-                T.showShort(mContext, "保存失败");
+                T.showShort(mContext, "修改失败");
             }
         }
     }

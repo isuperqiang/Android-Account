@@ -245,7 +245,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
      * @param text  the text to display on the specified tab's TextView
      */
     public void setTabText(int index, String text) {
-        TextView tv = (TextView) mTabTitleViews.get(index);
+        TextView tv = mTabTitleViews.get(index);
 
         if (tv != null) {
             tv.setText(text);

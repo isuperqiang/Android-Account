@@ -77,8 +77,9 @@ public class DateUtils {
         return calendar.getTime();
     }
 
-    public static Date getMonthStart(int month) {
+    public static Date getMonthStart(int year, int month) {
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
@@ -87,8 +88,10 @@ public class DateUtils {
         return calendar.getTime();
     }
 
-    public static Date getMonthEnd(int month) {
+    public static Date getMonthEnd(int year, int month) {
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.HOUR_OF_DAY, 23);
         calendar.set(Calendar.MINUTE, 59);

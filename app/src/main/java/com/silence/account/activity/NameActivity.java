@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 
 import com.silence.account.R;
 import com.silence.account.utils.Constant;
@@ -28,16 +27,13 @@ public class NameActivity extends BaseActivity {
     NormalEditText mEtModifyUsername;
 
     @Override
-    public void initView() {
-        disPlayBack(true);
-        setActionTitle("编辑昵称");
-        setContentView(R.layout.activity_name);
-        ButterKnife.bind(this);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_name);
+        ButterKnife.bind(this);
+        setTitle("编辑昵称");
+        showBackwardView(true);
+        showDivider(true);
         mEtModifyUsername.setText(BmobUser.getCurrentUser(this).getUsername());
     }
 
@@ -89,13 +85,5 @@ public class NameActivity extends BaseActivity {
         } else {
             T.showShort(this, "请填写用户名");
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

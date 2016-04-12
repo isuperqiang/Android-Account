@@ -91,7 +91,7 @@ public class ExpenseDao {
                 int imageId = cursor.getInt(1);
                 float sumCat = cursor.getFloat(2);
                 expenseStatisticses.add(new ExpenseStatistics(new ExpenseCat(imageId, categoryName),
-                        sumCat, FormatUtils.formatFloat(sumCat / sumExpense * 100)));
+                        sumCat, FormatUtils.formatFloat("#.0",sumCat / sumExpense * 100)));
             } while (cursor.moveToNext());
         }
         cursor.close();

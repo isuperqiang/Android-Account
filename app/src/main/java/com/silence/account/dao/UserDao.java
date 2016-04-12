@@ -13,11 +13,9 @@ import java.util.List;
  * Created by Silence on 2016/3/9 0009.
  */
 public class UserDao {
-    private DBOpenHelper mDBOpenHelper;
     private Dao<User, Integer> mDao;
 
     public UserDao(Context context) {
-        mDBOpenHelper = DBOpenHelper.getInstance(context);
         mDao = DBOpenHelper.getInstance(context).getDao(User.class);
     }
 
@@ -32,9 +30,6 @@ public class UserDao {
     }
 
     public void addUser(User user) {
-//        SQLiteDatabase sqLiteDatabase = mDBOpenHelper.getWritableDatabase();
-//        sqLiteDatabase.execSQL("insert into user (objectId, name, email) values (?,?,?);",
-//                new Object[]{user.getObjectId(), user.getUsername(), user.getEmail()});
         try {
             mDao.create(user);
         } catch (SQLException e) {

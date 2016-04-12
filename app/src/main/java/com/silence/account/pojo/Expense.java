@@ -15,17 +15,17 @@ import java.util.Date;
 @DatabaseTable(tableName = "expense")
 public class Expense implements Parcelable {
     @DatabaseField(generatedId = true, columnName = "id")
-    private int mId;              //主键
+    private int mId;                 //主键
     @DatabaseField(canBeNull = false, columnName = "date")
-    private Date mDate;         //日期
+    private Date mDate;              //日期
     @DatabaseField(canBeNull = false, columnName = "amount")
-    private float mAmount;        //金额
+    private float mAmount;            //金额
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "categoryId")
     private ExpenseCat mCategory;     //类别
     @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "userId")
-    private User mUser;             //用户
+    private User mUser;               //用户
     @DatabaseField(columnName = "note")
-    private String mNote;         //备注
+    private String mNote;             //备注
 
     public Expense() {
     }

@@ -3,7 +3,6 @@ package com.silence.account.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 
 import com.silence.account.R;
 import com.silence.account.pojo.User;
@@ -31,16 +30,13 @@ public class ForgetPassActivity extends BaseActivity {
     NormalEditText mForgetEmail;
 
     @Override
-    public void initView() {
-        setContentView(R.layout.activity_forget_pass);
-        disPlayBack(true);
-        setActionTitle("忘记密码");
-        ButterKnife.bind(this);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_forget_pass);
+        ButterKnife.bind(this);
+        setTitle("找回密码");
+        showBackwardView(true);
+        showDivider(true);
     }
 
     @OnClick(R.id.btn_pass_next)
@@ -85,11 +81,4 @@ public class ForgetPassActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

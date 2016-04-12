@@ -3,7 +3,6 @@ package com.silence.account.activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +14,8 @@ import com.silence.account.fragment.ShowExpenseFgt;
 import com.silence.account.fragment.ShowIncomeFgt;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.DateUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Date;
 
@@ -40,25 +41,22 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
     private ShowExpenseFgt mShowExpenseFgt;
     private float mIncome;
     private float mExpense;
-    private boolean mIsUpdate;
-
-    @Override
-    public void initView() {
-        setContentView(R.layout.activity_item);
-        ButterKnife.bind(this);
-        disPlayBack(true);
-    }
+    private int mType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_item);
+        ButterKnife.bind(this);
+        showBackwardView(true);
+        showDivider(true);
         mFragmentManager = getSupportFragmentManager();
         IncomeDao incomeDao = new IncomeDao(this);
         ExpenseDao expenseDao = new ExpenseDao(this);
-        int type = getIntent().getIntExtra(Constant.TYPE_DATE, 0);
-        switch (type) {
+        mType = getIntent().getIntExtra(Constant.TYPE_DATE, 0);
+        switch (mType) {
             case Constant.TYPE_MONTH: {
-                setActionTitle("本月");
+                setTitle("本月");
                 Date start = DateUtils.getMonthStart();
                 Date end = DateUtils.getMonthEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end);
@@ -66,10 +64,12 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
+                mShowExpenseFgt = ShowExpenseFgt.getInstance(Constant.TYPE_MONTH);
+                mFragmentManager.beginTransaction().add(R.id.show_fragment, mShowExpenseFgt).commit();
             }
             break;
             case Constant.TYPE_TODAY: {
-                setActionTitle("今天");
+                setTitle("今天");
                 Date start = DateUtils.getTodayStart();
                 Date end = DateUtils.getTodayEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end);
@@ -77,12 +77,12 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
-                mShowExpenseFgt = new ShowExpenseFgt();
+                mShowExpenseFgt = ShowExpenseFgt.getInstance(Constant.TYPE_TODAY);
                 mFragmentManager.beginTransaction().add(R.id.show_fragment, mShowExpenseFgt).commit();
             }
             break;
             case Constant.TYPE_WEEK: {
-                setActionTitle("本周");
+                setTitle("本周");
                 Date start = DateUtils.getWeekStart();
                 Date end = DateUtils.getWeekEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end);
@@ -90,6 +90,8 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
+                mShowExpenseFgt = ShowExpenseFgt.getInstance(Constant.TYPE_WEEK);
+                mFragmentManager.beginTransaction().add(R.id.show_fragment, mShowExpenseFgt).commit();
             }
             break;
         }
@@ -113,7 +115,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 mBtnShowIncome.setBackgroundResource(R.drawable.btn_orange_pressed);
                 mBtnShowExpense.setBackgroundResource(R.drawable.btn_orange_normal);
                 if (mShowIncomeFgt == null) {
-                    mShowIncomeFgt = new ShowIncomeFgt();
+                    mShowIncomeFgt = ShowIncomeFgt.getInstance(mType);
                     transaction.add(R.id.show_fragment, mShowIncomeFgt);
                 } else {
                     transaction.show(mShowIncomeFgt);
@@ -123,7 +125,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 mBtnShowIncome.setBackgroundResource(R.drawable.btn_orange_normal);
                 mBtnShowExpense.setBackgroundResource(R.drawable.btn_orange_pressed);
                 if (mShowExpenseFgt == null) {
-                    mShowExpenseFgt = new ShowExpenseFgt();
+                    mShowExpenseFgt = ShowExpenseFgt.getInstance(mType);
                     transaction.add(R.id.show_fragment, mShowExpenseFgt);
                 } else {
                     transaction.show(mShowExpenseFgt);
@@ -133,29 +135,20 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
         transaction.commit();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            if (mIsUpdate) {
-                setResult(Constant.RESULT_REFRESH_FINANCE);
-            }
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     public void updateExpense(float expense) {
         mLabelShowExpense.setText(String.valueOf(expense));
+        mExpense = expense;
         mLabelShowRemain.setText(String.valueOf(mIncome - expense));
-        mIsUpdate = true;
+        EventBus.getDefault().post("updated");
     }
 
     @Override
     public void updateIncome(float income) {
+        EventBus.getDefault().post("updated");
         mLabelShowIncome.setText(String.valueOf(income));
+        mIncome = income;
         mLabelShowRemain.setText(String.valueOf(income - mExpense));
-        mIsUpdate = true;
     }
 }

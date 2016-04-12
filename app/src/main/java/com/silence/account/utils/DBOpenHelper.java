@@ -43,6 +43,16 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
         mDaoMap = new HashMap<>();
     }
 
+    public void dropTable() {
+        SQLiteDatabase database = sDBOpenHelper.getWritableDatabase();
+        database.execSQL("delete from user;");
+        database.execSQL("delete from incomeCat;");
+        database.execSQL("delete from expenseCat;");
+        database.execSQL("delete from income;");
+        database.execSQL("delete from expense;");
+        database.execSQL("delete from account;");
+    }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {

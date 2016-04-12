@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -50,17 +49,14 @@ public class UserActivity extends BaseActivity {
     TextView mUsername;
 
     @Override
-    public void initView() {
-        setContentView(R.layout.activity_user);
-        ButterKnife.bind(this);
-        disPlayBack(true);
-        setActionTitle("我的资料");
-        mUsername.setText(BmobUser.getCurrentUser(this).getUsername());
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user);
+        ButterKnife.bind(this);
+        setTitle("我的资料");
+        showBackwardView(true);
+        showDivider(true);
+        mUsername.setText(BmobUser.getCurrentUser(this).getUsername());
         File photo = new File(BmobPro.getInstance(UserActivity.this).getCacheDownloadDir() +
                 File.separator + BmobUser.getCurrentUser(this, User.class).getPicture());
         mIvUserPhoto.setImageBitmap(BitmapFactory.decodeFile(photo.getAbsolutePath()));
@@ -126,19 +122,17 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent();
-            if (mNewName != null) {
-                intent.putExtra(Constant.NEW_USERNAME, mNewName);
-            }
-            if (mNewFileName != null) {
-                intent.putExtra(Constant.NEW_FILENAME, mNewFileName);
-            }
-            setResult(RESULT_OK, intent);
-            finish();
+    protected void onBackward() {
+        L.i("user onBackward");
+        Intent intent = new Intent();
+        if (mNewName != null) {
+            intent.putExtra(Constant.NEW_USERNAME, mNewName);
         }
-        return super.onOptionsItemSelected(item);
+        if (mNewFileName != null) {
+            intent.putExtra(Constant.NEW_FILENAME, mNewFileName);
+        }
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override

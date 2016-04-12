@@ -36,6 +36,7 @@ import com.silence.account.utils.DateUtils;
 import com.silence.account.utils.L;
 import com.silence.account.utils.T;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +91,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
         if (context instanceof onTimePickListener) {
             mOnTimePickListener = (onTimePickListener) context;
         }
-        mContext = getActivity().getApplication();
+        mContext = getActivity();
     }
 
     @Override
@@ -112,7 +113,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
             mIsUpdateExpense = false;
             mDate = new Date();
             mExpense = new Expense();
-            mExpense.setUser( AppApplication.getUser());
+            mExpense.setUser(AppApplication.getUser());
             mExpense.setDate(mDate);
             mExpense.setCategory((ExpenseCat) mCatAdapter.getItem(0));
         }
@@ -163,9 +164,9 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     private List<ExpenseCat> getCategory() {
-        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat(( AppApplication.getUser().getId()));
-        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加",  AppApplication.getUser()));
-        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除",  AppApplication.getUser()));
+        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat((AppApplication.getUser().getId()));
+        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加", AppApplication.getUser()));
+        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除", AppApplication.getUser()));
         return cats;
     }
 
@@ -260,7 +261,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
         mLabelExpenseTime.setText(DateUtils.date2Str(date));
     }
 
-    public void saveExpense() {
+    private void saveExpense() {
         String trim = mEtExpense.getText().toString().trim();
         float amount = Float.parseFloat(TextUtils.isEmpty(trim) ? "0" : trim);
         String note = mEtExpenseNote.getText().toString().trim();
@@ -269,16 +270,16 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
         ExpenseDao expenseDao = new ExpenseDao(mContext);
         if (mIsUpdateExpense) {
             if (expenseDao.updateExpense(mExpense)) {
-                T.showShort(mContext, "保存成功");
-                getActivity().setResult(Constant.RESULT_UPDATE_FINANCE);
+                T.showShort(mContext, "修改成功");
+                EventBus.getDefault().post("expense_updated");
                 getActivity().finish();
             } else {
-                T.showShort(mContext, "保存失败");
+                T.showShort(mContext, "修改失败");
             }
         } else {
             if (expenseDao.addExpense(mExpense)) {
                 T.showShort(mContext, "保存成功");
-                getActivity().setResult(Constant.RESULT_INSERT_FINANCE);
+                EventBus.getDefault().post("expense_inserted");
                 getActivity().finish();
             } else {
                 T.showShort(mContext, "保存失败");

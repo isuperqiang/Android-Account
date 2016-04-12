@@ -5,6 +5,17 @@
               android:orientation="horizontal"
               android:padding="8dp">
 
+    <TextView
+        android:id="@+id/label_item_income_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="2dp"
+        android:paddingRight="8dp"
+        android:text="12/12"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        />
     <ImageView
         android:id="@+id/icon_item_income_category"
         android:layout_width="36dp"
@@ -28,6 +39,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:text="20.00"
+        android:layout_marginRight="20dp"
         android:textColor="@color/red"
         android:textSize="20sp"
         android:textStyle="bold"/>

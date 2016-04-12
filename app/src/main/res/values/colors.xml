@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="main_color">#db0f0c</color>
+    <color name="pure_white">#fcfbfb</color>
+
+    <!-- 标题栏返回按钮的背景颜色 -->
+    <drawable name="button_backward_pressed">#ffdb8100</drawable>
+    <drawable name="button_backward_normal">#00000000</drawable>
+
+    <!-- 程序主色调 -->
+    <color name="background">#f2f2f2</color>
+    <color name="table_background">#cbcbcb</color>
+    <color name="gray">#808080</color>
+    <color name="light_white">#fcfcfc</color>
+    <color name="bg_top_bar">#fbcd45</color>
+
     <color name="colorPrimary">#fbcd45</color>
     <color name="colorPrimaryDark">#f6a844</color>
     <color name="colorAccent">#f9af50</color>
+
     <color name="main_bg">#f5f5f5</color>
     <color name="btn_color_main_bg_normal">#fff78b00</color>
     <color name="btn_color_main_bg_pressed">#ffdb8100</color>

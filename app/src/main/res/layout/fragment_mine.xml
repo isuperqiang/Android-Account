@@ -93,6 +93,22 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_me_check"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/icon_refresh"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="检查更新"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/ll_me_about"
         style="@style/me_ll_style"
         >
@@ -110,5 +126,20 @@
             style="@style/image_more"
             />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_me_init"
+        style="@style/me_ll_style"
+        >
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/btn_delete_gray_n"/>
+
+        <TextView
+            style="@style/me_text_style"
+            android:text="初始化"/>
     </LinearLayout>
 </LinearLayout>

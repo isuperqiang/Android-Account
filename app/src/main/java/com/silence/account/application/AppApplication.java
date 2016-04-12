@@ -34,7 +34,7 @@ public class AppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Bmob.initialize(getApplicationContext(), "");
+        Bmob.initialize(getApplicationContext(), "7930be502d4400a41d4f656fbd9c65cf");
         sAppApplication = this;
 //        refWatcher = LeakCanary.install(this);
     }

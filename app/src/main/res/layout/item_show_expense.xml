@@ -5,6 +5,18 @@
               android:orientation="horizontal"
               android:padding="8dp">
 
+    <TextView
+        android:id="@+id/label_item_expense_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingLeft="2dp"
+        android:paddingRight="8dp"
+        android:text="12/12"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        />
+
     <ImageView
         android:id="@+id/icon_item_expense_category"
         android:layout_width="36dp"
@@ -15,9 +27,9 @@
         android:id="@+id/label_item_expense_category"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
+        android:paddingLeft="10dp"
         android:text="生活用品"
         android:textColor="@color/color_text_c7"
         android:textSize="16sp"/>
@@ -26,6 +38,7 @@
         android:id="@+id/label_item_expense_account"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginRight="20dp"
         android:gravity="center_vertical"
         android:text="20.00"
         android:textColor="@color/green"

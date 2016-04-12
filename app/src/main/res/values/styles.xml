@@ -1,12 +1,36 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/bg_top</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:actionBarSize">48dp</item>
+    <style name="TopView">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="TopView.Title" parent="@style/TopView">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@drawable/button_backward_selector</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <style name="TopView.Button" parent="@style/TopView">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:background">@drawable/button_backward_selector</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="pop_chart">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:background">@drawable/btn_orange_style</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@drawable/pop_bg_color</item>
     </style>
 
     <style name="et_normal_style">
@@ -145,5 +169,27 @@
     <style name="popwindow_anim_style">
         <item name="android:windowEnterAnimation">@anim/pop_show</item>
         <item name="android:windowExitAnimation">@anim/pop_hide</item>
+    </style>
+
+    <style name="text_line_chart_list_header">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/color_text_c7</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="text_line_chart_list_item" parent="text_line_chart_list_header">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_show_label">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/actionbar_text_default</item>
     </style>
 </resources>

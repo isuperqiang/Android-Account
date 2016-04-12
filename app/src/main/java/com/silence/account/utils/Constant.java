@@ -4,6 +4,7 @@ package com.silence.account.utils;
  * Created by Silence on 2016/3/6 0006.
  */
 public interface Constant {
+    int DELAY_TIME=1000;
     String FORGET_PASS = "com.silence.forget.password";
     String TYPE_ADD_CATEGORY = "com.silence.pojo.category";
     String TYPE_CATEGORY = "type_category";

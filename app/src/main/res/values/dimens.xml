@@ -6,4 +6,10 @@
     <dimen name="font_size_f28">18.0dip</dimen>
     <dimen name="pie_chart_text1_size">20sp</dimen>
     <dimen name="pie_chart_text2_size">28sp</dimen>
+    <!-- 头部 和 底部的高度 -->
+    <dimen name="header_height">48dp</dimen>
+    <dimen name="footer_height">56dp</dimen>
+    <!-- 内容padding和表格margin -->
+    <dimen name="content_padding">4dp</dimen>
+    <dimen name="table_margin">4dp</dimen>
 </resources>

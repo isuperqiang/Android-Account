@@ -43,6 +43,7 @@ public class PieIncomeFgt extends BaseFragment implements
     private IncomeDao mIncomeDao;
     private PieChartData mPieChartData;
     private int mMonth;
+    private int mYear;
     private int[] mArcQueue;
     private CommonAdapter mCommonAdapter;
     private List<IncomeStatistics> mIncomeStatisticses;
@@ -51,7 +52,9 @@ public class PieIncomeFgt extends BaseFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mIncomeDao = new IncomeDao(getActivity());
-        mMonth = Calendar.getInstance().get(Calendar.MONTH);
+        Calendar instance = Calendar.getInstance();
+        mMonth = instance.get(Calendar.MONTH);
+        mYear = instance.get(Calendar.YEAR);
         mPieChartData = new PieChartData();
     }
 
@@ -71,7 +74,7 @@ public class PieIncomeFgt extends BaseFragment implements
         mPieChartData.setHasLabelsOnlyForSelected(false);
         mPieChart.setValueSelectionEnabled(true);
         mPieChart.setCircleFillRatio(1.0f);
-        updateData(DateUtils.getMonthStart(mMonth), DateUtils.getMonthEnd(mMonth));
+        updateData(DateUtils.getMonthStart(mYear, mMonth), DateUtils.getMonthEnd(mYear, mMonth));
         return view;
     }
 
@@ -91,9 +94,15 @@ public class PieIncomeFgt extends BaseFragment implements
     }
 
     public void updateData(Date start, Date end) {
-        mLabelExpenseDateChart.setText(DateUtils.date2Str(start, "MM月dd日") + " - " + DateUtils.date2Str(end, "dd日"));
+        String label;
+        if (mYear < Calendar.getInstance().get(Calendar.YEAR)) {
+            label = DateUtils.date2Str(start, "yyyy年MM月dd日") + " - " + DateUtils.date2Str(end, "dd日");
+        } else {
+            label = DateUtils.date2Str(start, "MM月dd日") + " - " + DateUtils.date2Str(end, "dd日");
+        }
+        mLabelExpenseDateChart.setText(label);
         mPieChart.setOnValueTouchListener(new ValueTouchListener());
-            mIncomeStatisticses = mIncomeDao.getPeriodCatSumExpense(start, end);
+        mIncomeStatisticses = mIncomeDao.getPeriodCatSumExpense(start, end);
         if (mIncomeStatisticses != null && mIncomeStatisticses.size() > 0) {
             List<SliceValue> sliceValueList = new ArrayList<>(mIncomeStatisticses.size());
             mPieChartData.setCenterText1("总收入");
@@ -106,7 +115,7 @@ public class PieIncomeFgt extends BaseFragment implements
         } else {
             mPieChartData.setValues(null);
             mPieChartData.setCenterText2("");
-            mPieChartData.setCenterText1("没有记录");
+            mPieChartData.setCenterText1("还没有记录哦~~");
         }
         mPieChart.setPieChartData(mPieChartData);
         prepareDataAnimation();
@@ -141,14 +150,17 @@ public class PieIncomeFgt extends BaseFragment implements
         switch (view.getId()) {
             case R.id.icon_expense_chart_left: {
                 mMonth--;
-                updateData(DateUtils.getMonthStart(mMonth), DateUtils.getMonthEnd(mMonth));
+                if (mMonth < 0) {
+                    mMonth = mMonth + 12;
+                    if ((mMonth + 1) % 12 == 0) {
+                        mYear--;
+                    }
+                }
+                updateData(DateUtils.getMonthStart(mYear, mMonth), DateUtils.getMonthEnd(mYear, mMonth));
             }
             break;
             case R.id.label_expense_date_chart: {
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = DatePickerDialog.newInstance(this, now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
-                );
+                DatePickerDialog dpd = DatePickerDialog.newInstance(this, mYear, mMonth, 1);
                 dpd.setStartTitle("开始日期");
                 dpd.setEndTitle("结束日期");
                 dpd.setAccentColor(getResources().getColor(R.color.colorPrimary));
@@ -156,8 +168,16 @@ public class PieIncomeFgt extends BaseFragment implements
             }
             break;
             case R.id.icon_expense_chart_right: {
+                Calendar calendar = Calendar.getInstance();
+                if (mYear == calendar.get(Calendar.YEAR) && mMonth >= calendar.get(Calendar.MONTH)) {
+                    return;
+                }
                 mMonth++;
-                updateData(DateUtils.getMonthStart(mMonth), DateUtils.getMonthEnd(mMonth));
+                if (mMonth > 11) {
+                    mMonth = mMonth - 12;
+                    mYear++;
+                }
+                updateData(DateUtils.getMonthStart(mYear, mMonth), DateUtils.getMonthEnd(mYear, mMonth));
             }
             break;
         }
@@ -166,6 +186,7 @@ public class PieIncomeFgt extends BaseFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        mMonth = Calendar.getInstance().get(Calendar.MONTH);
         DatePickerDialog dpd = (DatePickerDialog) getActivity().getFragmentManager().findFragmentByTag("DatePickerDialog");
         if (dpd != null) dpd.setOnDateSetListener(this);
     }

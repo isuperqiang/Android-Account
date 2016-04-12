@@ -23,7 +23,7 @@
     <RadioGroup
         android:id="@+id/radio_gp_tab"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="52dp"
         android:orientation="horizontal"
         >
 
@@ -31,28 +31,28 @@
             android:id="@+id/radio_btn_detail"
             style="@style/tab_menu_style"
             android:drawableTop="@drawable/nav_btn_detail"
-            android:text="明细"
+            android:text="@string/tab_detail"
             />
 
         <RadioButton
             android:id="@+id/radio_btn_account"
             style="@style/tab_menu_style"
             android:drawableTop="@drawable/nav_btn_account"
-            android:text="账户"
+            android:text="@string/tab_invest"
             />
 
         <RadioButton
             android:id="@+id/radio_btn_chart"
             style="@style/tab_menu_style"
             android:drawableTop="@drawable/nav_btn_chart"
-            android:text="图表"
+            android:text="@string/tab_chart"
             />
 
         <RadioButton
             android:id="@+id/radio_btn_me"
             style="@style/tab_menu_style"
             android:drawableTop="@drawable/nav_btn_me"
-            android:text="我的"
+            android:text="@string/tab_mine"
             />
     </RadioGroup>
 </LinearLayout>

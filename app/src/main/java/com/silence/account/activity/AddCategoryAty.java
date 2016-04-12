@@ -3,8 +3,6 @@ package com.silence.account.activity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -44,18 +42,19 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
     private String mType;
 
     @Override
-    public void initView() {
-        setContentView(R.layout.activity_add_category);
-        ButterKnife.bind(this);
-        disPlayBack(true);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_add_category);
+        ButterKnife.bind(this);
+        setTitle("添加类别");
+        showBackwardView(true);
+        showForwardView(true);
+        showDivider(true);
+        setContentView(R.layout.activity_add_category);
+        ButterKnife.bind(this);
         Parcelable extra = getIntent().getParcelableExtra(Constant.UPDATE_CAT);
         if (extra != null) {
-            setActionTitle("修改类别");
+            setTitle("修改类别");
             if (extra instanceof ExpenseCat) {
                 mType = Constant.TYPE_EXPENSE;
                 mExpenseCat = (ExpenseCat) extra;
@@ -72,7 +71,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
         } else {
             mResId = R.mipmap.icon_shouru_type_qita;
             mType = getIntent().getStringExtra(Constant.TYPE_CATEGORY);
-            setActionTitle("添加类别");
+            setTitle("添加类别");
         }
         CommonAdapter commonAdapter = new CommonAdapter<Integer>(initData(), R.layout.item_add_category) {
             @Override
@@ -123,65 +122,51 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_record, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        } else if (item.getItemId() == R.id.menu_item_save) {
-            String name = mEtAddCategory.getText().toString().trim();
-            if (!TextUtils.isEmpty(name)) {
-                if (TextUtils.equals(mType, Constant.TYPE_INCOME)) {
-                    IncomeCatDao incomeCatDao = new IncomeCatDao(this);
-                    if (mIncomeCat != null) {
-                        if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AppApplication.getUser()))) {
-                            T.showShort(this, "修改成功");
-                            setResult(RESULT_OK);
-                            finish();
-                        } else {
-                            T.showShort(this, "修改失败");
-                        }
+    protected void onForward() {
+        String name = mEtAddCategory.getText().toString().trim();
+        if (!TextUtils.isEmpty(name)) {
+            if (TextUtils.equals(mType, Constant.TYPE_INCOME)) {
+                IncomeCatDao incomeCatDao = new IncomeCatDao(this);
+                if (mIncomeCat != null) {
+                    if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AppApplication.getUser()))) {
+                        T.showShort(this, "修改成功");
+                        setResult(RESULT_OK);
+                        finish();
                     } else {
-                        if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AppApplication.getUser()))) {
-                            T.showShort(this, "保存成功");
-                            setResult(RESULT_OK);
-                            finish();
-                        } else {
-                            T.showShort(this, "保存失败");
-                        }
+                        T.showShort(this, "修改失败");
                     }
-                } else if (TextUtils.equals(mType, Constant.TYPE_EXPENSE)) {
-                    ExpenseCatDao expenseCatDao = new ExpenseCatDao(this);
-                    L.i("expense cat");
-                    if (mExpenseCat != null) {
-                        if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AppApplication.getUser()))) {
-                            T.showShort(this, "修改成功");
-                            setResult(RESULT_OK);
-                            finish();
-                        } else {
-                            T.showShort(this, "修改失败");
-                        }
+                } else {
+                    if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AppApplication.getUser()))) {
+                        T.showShort(this, "保存成功");
+                        setResult(RESULT_OK);
+                        finish();
                     } else {
-                        if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AppApplication.getUser()))) {
-                            T.showShort(this, "保存成功");
-                            setResult(RESULT_OK);
-                            finish();
-                        } else {
-                            T.showShort(this, "保存失败");
-                        }
+                        T.showShort(this, "保存失败");
                     }
                 }
-            } else {
-                T.showShort(this, "请填写类别名称");
+            } else if (TextUtils.equals(mType, Constant.TYPE_EXPENSE)) {
+                ExpenseCatDao expenseCatDao = new ExpenseCatDao(this);
+                L.i("expense cat");
+                if (mExpenseCat != null) {
+                    if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AppApplication.getUser()))) {
+                        T.showShort(this, "修改成功");
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        T.showShort(this, "修改失败");
+                    }
+                } else {
+                    if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AppApplication.getUser()))) {
+                        T.showShort(this, "保存成功");
+                        setResult(RESULT_OK);
+                        finish();
+                    } else {
+                        T.showShort(this, "保存失败");
+                    }
+                }
             }
-            return true;
         } else {
-            return super.onOptionsItemSelected(item);
+            T.showShort(this, "请填写类别名称");
         }
     }
 

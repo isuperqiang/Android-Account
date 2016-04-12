@@ -21,7 +21,7 @@
             android:layout_marginTop="10dp"
             android:text="结余"
             android:textColor="@color/actionbar_text_default"
-            android:textSize="16sp"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/label_show_remain"
@@ -36,7 +36,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0.6dp"
             android:background="@android:color/darker_gray"
             />
 
@@ -49,29 +49,21 @@
 
             <TextView
                 android:id="@+id/label_show_income"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                style="@style/text_show_label"
                 android:text="12.09"
-                android:textColor="@color/actionbar_text_default"
-                android:textSize="16sp"/>
+                />
 
             <View
-                android:layout_width="1dp"
+                android:layout_width="0.6dp"
                 android:layout_height="match_parent"
                 android:background="@android:color/darker_gray"
                 />
 
             <TextView
                 android:id="@+id/label_show_expense"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
+                style="@style/text_show_label"
                 android:text="-112.09"
-                android:textColor="@color/actionbar_text_default"
-                android:textSize="16sp"/>
+                />
 
         </LinearLayout>
     </LinearLayout>

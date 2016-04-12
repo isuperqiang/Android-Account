@@ -1,7 +1,7 @@
 package com.silence.account.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.silence.account.R;
@@ -29,11 +29,13 @@ public class RegisterActivity extends BaseActivity {
     EditText mRegPass;
 
     @Override
-    public void initView() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        disPlayBack(true);
-        setActionTitle("注册");
+        setTitle(R.string.text_register);
+        showBackwardView(true);
+        showDivider(true);
     }
 
     @OnClick(R.id.btn_register)
@@ -88,13 +90,5 @@ public class RegisterActivity extends BaseActivity {
         } else {
             T.showShort(this, "请填写完整信息");
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
