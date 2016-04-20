@@ -113,7 +113,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
             mIsUpdateExpense = false;
             mDate = new Date();
             mExpense = new Expense();
-            mExpense.setUser(AppApplication.getUser());
+            mExpense.setUser(AppApplication.sUser);
             mExpense.setDate(mDate);
             mExpense.setCategory((ExpenseCat) mCatAdapter.getItem(0));
         }
@@ -164,9 +164,9 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     private List<ExpenseCat> getCategory() {
-        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat((AppApplication.getUser().getId()));
-        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加", AppApplication.getUser()));
-        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除", AppApplication.getUser()));
+        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat((AppApplication.sUser.getId()));
+        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加", AppApplication.sUser));
+        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除", AppApplication.sUser));
         return cats;
     }
 

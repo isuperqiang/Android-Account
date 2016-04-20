@@ -25,7 +25,7 @@ public class ExpenseCatDao {
     public List<ExpenseCat> getExpenseCat(int userId) {
         List<ExpenseCat> cats = null;
         try {
-            cats = mDao.queryForEq("userId", userId);
+            cats = mDao.queryForEq("ASuserId", userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

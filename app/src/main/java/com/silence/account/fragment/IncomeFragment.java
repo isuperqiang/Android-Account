@@ -112,7 +112,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
             mIncome = new Income();
             mDate = new Date();
             mIncome.setDate(mDate);
-            mIncome.setUser(AppApplication.getUser());
+            mIncome.setUser(AppApplication.sUser);
             mIncome.setCategory((IncomeCat) mCatAdapter.getItem(0));
         }
         mEtIncomeTime.setText(DateUtils.date2Str(mDate));
@@ -155,9 +155,9 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     private List<IncomeCat> getCategory() {
-        List<IncomeCat> cats = mIncomeCatDao.getIncomeCat(AppApplication.getUser().getId());
-        cats.add(new IncomeCat(R.mipmap.jiahao_bai, "添加", AppApplication.getUser()));
-        cats.add(new IncomeCat(R.mipmap.jianhao_bai, "删除", AppApplication.getUser()));
+        List<IncomeCat> cats = mIncomeCatDao.getIncomeCat(AppApplication.sUser.getId());
+        cats.add(new IncomeCat(R.mipmap.jiahao_bai, "添加", AppApplication.sUser));
+        cats.add(new IncomeCat(R.mipmap.jianhao_bai, "删除", AppApplication.sUser));
         return cats;
     }
 

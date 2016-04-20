@@ -49,7 +49,6 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
         setContentView(R.layout.activity_item);
         ButterKnife.bind(this);
         showBackwardView(true);
-        showDivider(true);
         mFragmentManager = getSupportFragmentManager();
         IncomeDao incomeDao = new IncomeDao(this);
         ExpenseDao expenseDao = new ExpenseDao(this);

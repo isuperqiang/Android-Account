@@ -10,15 +10,15 @@ import com.j256.ormlite.table.DatabaseTable;
  * Created by Silence on 2016/3/7 0007.
  * 支出类别类
  */
-@DatabaseTable(tableName = "expenseCat")
+@DatabaseTable(tableName = "ASexpenseCat")
 public class ExpenseCat implements Parcelable {
-    @DatabaseField(generatedId = true, columnName = "id")
+    @DatabaseField(generatedId = true, columnName = "ASid")
     private int mId;        //主键
-    @DatabaseField(canBeNull = false, columnName = "name")
+    @DatabaseField(canBeNull = false, columnName = "ASname")
     private String mName;   //名称
-    @DatabaseField(canBeNull = false, columnName = "image")
+    @DatabaseField(canBeNull = false, columnName = "ASimage")
     private int mImageId;   //图标
-    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "userId")
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "ASuserId")
     private User mUser;     //用户
 
     public ExpenseCat() {

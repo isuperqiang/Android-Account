@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="48dp"
+              android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/label_item_invest_type"
+        style="@style/text_line_chart_list_header"
+        android:text="定期存款"/>
+
+    <TextView
+        android:id="@+id/label_item_invest_amount"
+        style="@style/text_line_chart_list_item"
+        android:text="100"
+        />
+
+    <TextView
+        android:id="@+id/label_item_invest_year"
+        style="@style/text_line_chart_list_item"
+        android:text="3"
+        />
+
+    <TextView
+        android:id="@+id/label_item_invest_rate"
+        style="@style/text_line_chart_list_item"
+        android:text="2.5"
+        />
+
+    <TextView
+        android:id="@+id/label_item_invest_earning"
+        style="@style/text_line_chart_list_item"
+        android:text="1000"
+        />
+
+</LinearLayout>

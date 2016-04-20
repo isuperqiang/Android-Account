@@ -22,7 +22,7 @@ public class UserDao {
     public User getCurrentUser(String username) {
         List<User> users = null;
         try {
-            users = mDao.queryForEq("name", username);
+            users = mDao.queryForEq("ASname", username);
         } catch (SQLException e) {
             e.printStackTrace();
         }

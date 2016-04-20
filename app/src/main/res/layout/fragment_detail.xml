@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
-                android:text="本月差额"
+                android:text="本月结余"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
         </LinearLayout>

@@ -11,7 +11,6 @@ public class AboutActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         setTitle("关于我们");
-        showDivider(true);
         showBackwardView(true);
     }
 }

@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/icon_expense_chart_left"
-                android:layout_width="28dp"
-                android:layout_height="24dp"
+                android:layout_width="24dp"
+                android:layout_height="18dp"
                 android:paddingBottom="2dp"
                 android:paddingRight="8dp"
                 android:paddingTop="2dp"
@@ -36,13 +36,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3月01日-31日"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 />
 
             <ImageView
                 android:id="@+id/icon_expense_chart_right"
-                android:layout_width="28dp"
-                android:layout_height="24dp"
+                android:layout_width="24dp"
+                android:layout_height="18dp"
                 android:paddingBottom="2dp"
                 android:paddingLeft="8dp"
                 android:paddingTop="2dp"

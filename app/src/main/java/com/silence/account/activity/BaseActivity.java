@@ -35,25 +35,15 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         mBackwardButton.setOnClickListener(this);
     }
 
-    protected void showDivider(boolean show) {
-        if (show) {
-            if (mTopDivider.getVisibility() == View.INVISIBLE) {
-                mTopDivider.setVisibility(View.VISIBLE);
-            }
-        } else {
-            if (mTopDivider.getVisibility() == View.VISIBLE) {
-                mTopDivider.setVisibility(View.INVISIBLE);
-            }
-        }
-    }
-
     protected void showBackwardView(boolean show, int resId) {
         if (show) {
             mBackwardButton.setImageResource(resId);
             mBackwardButton.setVisibility(View.VISIBLE);
+            mTopDivider.setVisibility(View.VISIBLE);
         } else {
             if (mBackwardButton.getVisibility() == View.VISIBLE) {
                 mBackwardButton.setVisibility(View.GONE);
+                mTopDivider.setVisibility(View.INVISIBLE);
             }
         }
     }
@@ -62,10 +52,12 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         if (show) {
             if (mBackwardButton.getVisibility() == View.GONE) {
                 mBackwardButton.setVisibility(View.VISIBLE);
+                mTopDivider.setVisibility(View.VISIBLE);
             }
         } else {
             if (mBackwardButton.getVisibility() == View.VISIBLE) {
                 mBackwardButton.setVisibility(View.GONE);
+                mTopDivider.setVisibility(View.INVISIBLE);
             }
         }
     }

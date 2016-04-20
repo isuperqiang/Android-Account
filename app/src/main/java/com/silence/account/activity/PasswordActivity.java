@@ -33,7 +33,6 @@ public class PasswordActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTitle("修改密码");
         showBackwardView(true);
-        showDivider(true);
     }
 
     @OnClick(R.id.btn_modify_pass)

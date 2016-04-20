@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         ButterKnife.bind(this);
         ShareSDK.initSDK(this);
         mRadioGpTab.setOnCheckedChangeListener(this);
-        AppApplication.setUser(new UserDao(this).getCurrentUser(BmobUser.getCurrentUser(getApplicationContext()).getUsername()));
+        AppApplication.sUser = new UserDao(this).getCurrentUser(BmobUser.getCurrentUser(getApplicationContext()).getUsername());
         mFragmentManager = getSupportFragmentManager();
         ((RadioButton) (mRadioGpTab.getChildAt(0))).setChecked(true);
         registerReceiver(mBroadcastReceiver, new IntentFilter(Constant.INTENT_FILTER));
@@ -122,8 +122,6 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 case R.id.radio_btn_account:
                     if (mAccountFragment == null) {
                         mAccountFragment = new AccountFragment();
-                    } else {
-                        mAccountFragment.clearNumber();
                     }
                     switchTitleBar(R.string.tab_invest, false, false, 0);
                     switchFragment(mAccountFragment);
@@ -187,7 +185,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
     }
 
-    //        @Override
+//    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
 //        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
 //            if ((System.currentTimeMillis() - exitTime) > 2000) {
@@ -200,6 +198,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 //        }
 //        return super.onKeyDown(keyCode, event);
 //    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

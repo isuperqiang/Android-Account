@@ -50,8 +50,6 @@ public class IncomeDao {
     }
 
     public float getPeriodSumIncome(Date start, Date end) {
-        //select date((select strftime('%Y-%m-%d', date) from income where id=1),'start of month') startdate;
-        //select date((select strftime('%Y-%m-%d', date) from income where id=1),'start of month','1 month','-1 day') enddate;
         List<Income> incomes = getPeriodIncomes(start, end);
         float sum = 0;
         if (incomes != null && incomes.size() > 0) {
@@ -64,9 +62,9 @@ public class IncomeDao {
 
     public List<IncomeStatistics> getPeriodCatSumExpense(Date start, Date end) {
         List<IncomeStatistics> incomeStatisticses = null;
-        String sql = "select incomeCat.name, incomeCat.image, sum(amount) sumCatIncome from income " +
-                ", incomeCat where income.categoryId = incomeCat.id and date between ? and ? and " +
-                "categoryId in (select distinct(categoryId) from income) group by categoryId;";
+        String sql = "select ASincomeCat.ASname, ASincomeCat.ASimage, sum(ASamount) sumCatIncome from ASincome " +
+                ", ASincomeCat where ASincome.AScategoryId = ASincomeCat.ASid and ASdate between ? and ? and " +
+                "AScategoryId in (select distinct(AScategoryId) from ASincome) group by AScategoryId;";
         SQLiteDatabase database = DBOpenHelper.getInstance(mContext).getReadableDatabase();
         Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end)});
         float sumExpense = getPeriodSumIncome(start, end);
@@ -87,7 +85,7 @@ public class IncomeDao {
     public List<Income> getPeriodIncomes(Date start, Date end) {
         List<Income> incomes = null;
         try {
-            incomes = mDao.queryBuilder().where().between("date", start, end).query();
+            incomes = mDao.queryBuilder().where().between("ASdate", start, end).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

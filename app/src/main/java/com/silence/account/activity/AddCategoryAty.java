@@ -44,13 +44,12 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_category);
+        setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
         setTitle("添加类别");
         showBackwardView(true);
         showForwardView(true);
-        showDivider(true);
-        setContentView(R.layout.activity_add_category);
+        setContentView(R.layout.activity_category);
         ButterKnife.bind(this);
         Parcelable extra = getIntent().getParcelableExtra(Constant.UPDATE_CAT);
         if (extra != null) {
@@ -128,7 +127,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
             if (TextUtils.equals(mType, Constant.TYPE_INCOME)) {
                 IncomeCatDao incomeCatDao = new IncomeCatDao(this);
                 if (mIncomeCat != null) {
-                    if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AppApplication.getUser()))) {
+                    if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AppApplication.sUser))) {
                         T.showShort(this, "修改成功");
                         setResult(RESULT_OK);
                         finish();
@@ -136,7 +135,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                         T.showShort(this, "修改失败");
                     }
                 } else {
-                    if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AppApplication.getUser()))) {
+                    if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AppApplication.sUser))) {
                         T.showShort(this, "保存成功");
                         setResult(RESULT_OK);
                         finish();
@@ -148,7 +147,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                 ExpenseCatDao expenseCatDao = new ExpenseCatDao(this);
                 L.i("expense cat");
                 if (mExpenseCat != null) {
-                    if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AppApplication.getUser()))) {
+                    if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AppApplication.sUser))) {
                         T.showShort(this, "修改成功");
                         setResult(RESULT_OK);
                         finish();
@@ -156,7 +155,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                         T.showShort(this, "修改失败");
                     }
                 } else {
-                    if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AppApplication.getUser()))) {
+                    if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AppApplication.sUser))) {
                         T.showShort(this, "保存成功");
                         setResult(RESULT_OK);
                         finish();

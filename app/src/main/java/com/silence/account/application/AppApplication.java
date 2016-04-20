@@ -12,7 +12,7 @@ import cn.bmob.v3.Bmob;
 public class AppApplication extends Application {
 //    private RefWatcher refWatcher;
     private static AppApplication sAppApplication;
-    private static User sUser;
+    public static User sUser;
 
 //    public static RefWatcher getRefWatcher(Context context) {
 //        AppApplication application = (AppApplication) context.getApplicationContext();
@@ -22,15 +22,6 @@ public class AppApplication extends Application {
     public static AppApplication getApplication() {
         return sAppApplication;
     }
-
-    public static User getUser() {
-        return sUser;
-    }
-
-    public static void setUser(User user) {
-        sUser = user;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

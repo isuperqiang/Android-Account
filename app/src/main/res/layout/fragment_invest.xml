@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/holo_orange_light"
+        android:orientation="horizontal"
+        android:paddingBottom="4dp"
+        android:paddingTop="4dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="本月结余"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/label_invest_remain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="100.00"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="本月投资"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/label_invest_invest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="100.00"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="本月闲置"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/label_invest_idle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="100.00"
+                android:textColor="@color/actionbar_text_default"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <Button
+        android:id="@+id/btn_invest"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_btn_login"
+        android:text="记录投资"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/bg_select_date"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            style="@style/text_line_chart_list_header"
+            android:text="类型"
+            />
+
+        <TextView
+            style="@style/text_line_chart_list_header"
+            android:text="金额"
+            />
+
+        <TextView
+            style="@style/text_line_chart_list_header"
+            android:text="期限"
+            />
+
+        <TextView
+            style="@style/text_line_chart_list_header"
+            android:text="利率"
+            />
+
+        <TextView
+            style="@style/text_line_chart_list_header"
+            android:text="收益"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/list_invest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fadeScrollbars="true"
+        />
+
+</LinearLayout>

@@ -71,7 +71,7 @@ public class ShowExpenseFgt extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_show_finance, container, false);
+        View view = inflater.inflate(R.layout.fragment_finance, container, false);
         ButterKnife.bind(this, view);
         mExpenseDao = new ExpenseDao(getActivity());
         switch (mType) {

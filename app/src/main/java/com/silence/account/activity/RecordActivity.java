@@ -46,7 +46,6 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
         ButterKnife.bind(this);
         setTitle("记账");
         showBackwardView(true);
-        showDivider(true);
         SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=56de48c7");
         mFragmentManager = getSupportFragmentManager();
         Parcelable extra = getIntent().getParcelableExtra(Constant.RECORD);

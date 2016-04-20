@@ -1,17 +1,32 @@
 package com.silence.account.fragment;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RadioGroup;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.silence.account.R;
-import com.silence.account.utils.FormatUtils;
-import com.silence.account.utils.T;
+import com.silence.account.activity.InvestActivity;
+import com.silence.account.adapter.CommonAdapter;
+import com.silence.account.dao.ExpenseDao;
+import com.silence.account.dao.IncomeDao;
+import com.silence.account.dao.InvestDao;
+import com.silence.account.pojo.Invest;
+import com.silence.account.utils.Constant;
+import com.silence.account.utils.DateUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.Date;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,34 +36,89 @@ import butterknife.OnClick;
  * Created by Silence on 2016/3/7 0007.
  */
 public class AccountFragment extends BaseFragment {
-    @Bind(R.id.et_deposit_amount)
-    EditText mEtDepositAmount;
-    @Bind(R.id.radio_gp_deposit)
-    RadioGroup mRadioGpDeposit;
-    @Bind(R.id.et_deposit_year)
-    EditText mEtDepositYear;
-    @Bind(R.id.et_deposit_rate)
-    EditText mEtDepositRate;
-    @Bind(R.id.tv_deposit_interest)
-    TextView mTvDepositInterest;
-    @Bind(R.id.tv_deposit_sum)
-    TextView mTvDepositSum;
+
+    @Bind(R.id.label_invest_remain)
+    TextView mLabelInvestRemain;
+    @Bind(R.id.list_invest)
+    ListView mListInvest;
+    @Bind(R.id.btn_invest)
+    Button mBtnInvest;
+    @Bind(R.id.label_invest_invest)
+    TextView mLabelInvestInvest;
+    @Bind(R.id.label_invest_idle)
+    TextView mLabelInvestIdle;
+    private Context mContext;
+    private float mIdle;
+    private static final int REQUEST_INVEST = 0x123;
+    private InvestDao mInvestDao;
+    private CommonAdapter mCommonAdapter;
+    private float mRemain;
+    private float mSumInvested;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
+        View view = inflater.inflate(R.layout.fragment_invest, container, false);
         ButterKnife.bind(this, view);
-        mRadioGpDeposit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        mInvestDao = new InvestDao(mContext);
+        getRemain();
+        List<Invest> invest = mInvestDao.findInvest(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+        mSumInvested = 0;
+        for (int i = 0; i < invest.size(); i++) {
+            mSumInvested += invest.get(i).getAmount();
+        }
+        mIdle = mRemain - mSumInvested;
+        if (mIdle <= 0) {
+            mBtnInvest.setEnabled(false);
+        } else {
+            mBtnInvest.setEnabled(true);
+        }
+        mLabelInvestIdle.setText(String.valueOf(mIdle));
+        mLabelInvestInvest.setText(String.valueOf(mSumInvested));
+        List<Invest> invests = mInvestDao.findAllInvest();
+        mCommonAdapter = new CommonAdapter<Invest>(invests, R.layout.item_invest) {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.radio_deposit_regular) {
-                    mEtDepositRate.setText("2.5");
-                } else if (checkedId == R.id.radio_deposit_demand) {
-                    mEtDepositRate.setText("0.35");
-                }
+            public void bindView(ViewHolder holder, Invest obj) {
+                holder.setText(R.id.label_item_invest_type, obj.getType());
+                holder.setText(R.id.label_item_invest_amount, String.valueOf(obj.getAmount()));
+                holder.setText(R.id.label_item_invest_year, String.valueOf(obj.getYear()));
+                holder.setText(R.id.label_item_invest_rate, String.valueOf(obj.getRate()));
+                holder.setText(R.id.label_item_invest_earning, String.valueOf(obj.getEarning()));
             }
-        });
+        };
+        mListInvest.setAdapter(mCommonAdapter);
         return view;
+    }
+
+    private void getRemain() {
+        Date start = DateUtils.getMonthStart();
+        Date end = DateUtils.getMonthEnd();
+        float incomes = new IncomeDao(mContext).getPeriodSumIncome(start, end);
+        float expenses = new ExpenseDao(mContext).getPeriodSumExpense(start, end);
+        mRemain = incomes - expenses;
+        mLabelInvestRemain.setText(String.valueOf(mRemain));
+    }
+
+    @Subscribe
+    public void refreshAccount(String message) {
+        if (TextUtils.equals(message, "income_inserted") || TextUtils.equals(message, "expense_updated")
+                || TextUtils.equals(message, "income_updated") || TextUtils.equals(message, "income_deleted")
+                || TextUtils.equals(message, "expense_deleted") || TextUtils.equals(message, "expense_inserted")) {
+            getRemain();
+            mIdle = mRemain - mSumInvested;
+            if (mIdle <= 0) {
+                mBtnInvest.setEnabled(false);
+            } else {
+                mBtnInvest.setEnabled(true);
+            }
+            mLabelInvestIdle.setText(String.valueOf(mIdle));
+        }
     }
 
     @Override
@@ -57,40 +127,34 @@ public class AccountFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.btn_calculate)
-    public void onClick() {
-        String strAmount = mEtDepositAmount.getText().toString().trim();
-        if (TextUtils.isEmpty(strAmount)) {
-            T.showShort(getActivity(), "请输入金额");
-            return;
-        }
-        if (mRadioGpDeposit.getCheckedRadioButtonId() == -1) {
-            T.showShort(getActivity(), "请选择类型");
-            return;
-        }
-        String strYear = mEtDepositYear.getText().toString().trim();
-        if (TextUtils.isEmpty(strYear)) {
-            T.showShort(getActivity(), "请输入年限");
-            return;
-        }
-        String strRate = mEtDepositRate.getText().toString().trim();
-        if (TextUtils.isEmpty(strRate)) {
-            T.showShort(getActivity(), "请输入利率");
-            return;
-        }
-        float amount = Float.parseFloat(strAmount);
-        float interest = amount * Float.parseFloat(strRate) * Float.parseFloat(strYear) / 100;
-        interest = FormatUtils.formatFloat("#.00", interest);
-        float sum = interest + amount;
-        mTvDepositInterest.setText(interest + "元");
-        mTvDepositSum.setText(sum + "元");
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
-    public void clearNumber() {
-        mEtDepositRate.setText("");
-        mEtDepositAmount.setText("");
-        mEtDepositYear.setText("");
-        mTvDepositSum.setText("0.00元");
-        mTvDepositInterest.setText("0.00元");
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_INVEST && resultCode == Activity.RESULT_OK) {
+            String stringExtra = data.getStringExtra(Constant.INVEST);
+            mLabelInvestRemain.setText(stringExtra);
+            mCommonAdapter.setData(mInvestDao.findAllInvest());
+            mSumInvested += Float.parseFloat(stringExtra);
+            mIdle = mRemain - mSumInvested;
+            if (mIdle <= 0) {
+                mBtnInvest.setEnabled(false);
+            } else {
+                mBtnInvest.setEnabled(true);
+            }
+            mLabelInvestInvest.setText(String.valueOf(mSumInvested));
+            mLabelInvestIdle.setText(String.valueOf(mIdle));
+        }
+    }
+
+    @OnClick(R.id.btn_invest)
+    public void onClick() {
+        Intent intent = new Intent(mContext, InvestActivity.class);
+        intent.putExtra(Constant.INVEST, mIdle);
+        startActivityForResult(intent, REQUEST_INVEST);
     }
 }

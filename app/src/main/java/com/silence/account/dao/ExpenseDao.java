@@ -42,11 +42,6 @@ public class ExpenseDao {
 
     public float getPeriodSumExpense(Date start, Date end) {
         List<Expense> expenses = getPeriodExpense(start, end);
-        try {
-            expenses = mDao.queryBuilder().where().between("date", start, end).query();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         float sum = 0;
         if (expenses != null && expenses.size() > 0) {
             for (int i = 0; i < expenses.size(); i++) {
@@ -78,9 +73,9 @@ public class ExpenseDao {
 
     public List<ExpenseStatistics> getPeriodCatSumExpense(Date start, Date end) {
         List<ExpenseStatistics> expenseStatisticses = null;
-        String sql = "select expenseCat.name, expenseCat.image, sum(amount) sumCatIncome from expense " +
-                ", expenseCat where expense.categoryId = expenseCat.id and date between ? and ? and " +
-                "categoryId in (select distinct(categoryId) from expense) group by categoryId;";
+        String sql = "select ASexpenseCat.ASname, ASexpenseCat.ASimage, sum(ASamount) sumCatIncome from ASexpense " +
+                ", ASexpenseCat where ASexpense.AScategoryId = ASexpenseCat.ASid and ASdate between ? and ? and " +
+                "AScategoryId in (select distinct(AScategoryId) from ASexpense) group by AScategoryId;";
         SQLiteDatabase database = DBOpenHelper.getInstance(mContext).getReadableDatabase();
         Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end)});
         float sumExpense = getPeriodSumExpense(start, end);
@@ -101,7 +96,7 @@ public class ExpenseDao {
     public List<Expense> getPeriodExpense(Date start, Date end) {
         List<Expense> expenses = null;
         try {
-            expenses = mDao.queryBuilder().where().between("date", start, end).query();
+            expenses = mDao.queryBuilder().where().between("ASdate", start, end).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

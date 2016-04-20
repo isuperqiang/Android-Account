@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="8dp"
+        android:text="投资金额(元)"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/et_invest_amount"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_edit_text"
+        android:inputType="number"
+        android:paddingLeft="4dp">
+
+        <requestFocus/>
+    </EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_gravity="center_vertical"
+            android:text="投资类型"
+            android:textSize="16sp"
+            />
+
+        <Spinner
+            android:id="@+id/spinner_invest"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:entries="@array/type_invest"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:text="投资期限(年)"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/et_invest_year"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_edit_text"
+        android:inputType="number"
+        android:paddingLeft="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="8dp"
+        android:text="利率(%)"
+        android:textSize="16sp"
+        />
+
+    <EditText
+        android:id="@+id/et_invest_rate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_edit_text"
+        android:inputType="number"
+        android:paddingLeft="4dp"/>
+
+    <Button
+        android:id="@+id/btn_add_invest"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_btn_login"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+
+    <!--<TableLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="20dp"-->
+    <!--android:background="@color/common_sub_item_bg_normal"-->
+    <!--android:paddingLeft="40dp"-->
+    <!--android:paddingRight="40dp"-->
+    <!--&gt;-->
+
+    <!--<TableRow-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:paddingTop="4dp"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:lineSpacingExtra="4dp"-->
+    <!--android:text="利息："-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_deposit_interest"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="right"-->
+    <!--android:text="0.00元"-->
+    <!--android:textSize="20sp"/>-->
+    <!--</TableRow>-->
+
+    <!--<TableRow-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingBottom="4dp"-->
+    <!--android:paddingTop="4dp"-->
+    <!--&gt;-->
+
+    <!--<TextView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:lineSpacingExtra="4dp"-->
+    <!--android:text="本息合计："-->
+    <!--android:textSize="16sp"/>-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/tv_deposit_sum"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_weight="1"-->
+    <!--android:gravity="right"-->
+    <!--android:text="0.00元"-->
+    <!--android:textSize="20sp"/>-->
+    <!--</TableRow>-->
+    <!--</TableLayout>-->
+
+</LinearLayout>

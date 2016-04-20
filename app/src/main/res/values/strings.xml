@@ -11,4 +11,11 @@
     <string name="tab_detail">明细</string>
     <string name="text_exit">再按一次退出程序</string>
     <string name="text_register">注册</string>
+    <string-array name="type_invest">
+        <item>定期存款</item>
+        <item>活期存款</item>
+        <item>基金</item>
+        <item>保险</item>
+        <item>股票</item>
+    </string-array>
 </resources>

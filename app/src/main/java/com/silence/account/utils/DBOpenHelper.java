@@ -7,11 +7,11 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.silence.account.pojo.Account;
 import com.silence.account.pojo.Expense;
 import com.silence.account.pojo.ExpenseCat;
 import com.silence.account.pojo.Income;
 import com.silence.account.pojo.IncomeCat;
+import com.silence.account.pojo.Invest;
 import com.silence.account.pojo.User;
 
 import java.sql.SQLException;
@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by Silence on 2016/3/9 0009.
  */
 public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
-    private static final String DB_NAME = "account.db";
+    private static final String DB_NAME = "ASaccount.db";
     private static final int DB_VERSION = 1;
     private static DBOpenHelper sDBOpenHelper;
     private Map<String, Dao> mDaoMap;
@@ -45,12 +45,12 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
 
     public void dropTable() {
         SQLiteDatabase database = sDBOpenHelper.getWritableDatabase();
-        database.execSQL("delete from user;");
-        database.execSQL("delete from incomeCat;");
-        database.execSQL("delete from expenseCat;");
-        database.execSQL("delete from income;");
-        database.execSQL("delete from expense;");
-        database.execSQL("delete from account;");
+        database.execSQL("delete from ASuser;");
+        database.execSQL("delete from ASincomeCat;");
+        database.execSQL("delete from ASexpenseCat;");
+        database.execSQL("delete from ASincome;");
+        database.execSQL("delete from ASexpense;");
+        database.execSQL("delete from ASinvest;");
     }
 
     @Override
@@ -61,7 +61,7 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, ExpenseCat.class);
             TableUtils.createTable(connectionSource, Income.class);
             TableUtils.createTable(connectionSource, Expense.class);
-            TableUtils.createTable(connectionSource, Account.class);
+            TableUtils.createTable(connectionSource, Invest.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -59,7 +59,7 @@ public class PieExpenseFgt extends BaseFragment implements DatePickerDialog.OnDa
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_pie_chart, container, false);
+        View view = inflater.inflate(R.layout.fragment_pie, container, false);
         ButterKnife.bind(this, view);
         mPieChartData.setHasCenterCircle(true);
         mPieChartData.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,

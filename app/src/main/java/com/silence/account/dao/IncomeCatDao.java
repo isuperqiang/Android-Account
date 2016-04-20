@@ -25,7 +25,7 @@ public class IncomeCatDao {
     public List<IncomeCat> getIncomeCat(int userId) {
         List<IncomeCat> cats = null;
         try {
-            cats = mDao.queryForEq("userId", userId);
+            cats = mDao.queryForEq("ASuserId", userId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

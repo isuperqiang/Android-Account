@@ -100,7 +100,7 @@ public class MineFragment extends BaseFragment {
                         //在这里初始化所有数据表，并退出登录
                         DBOpenHelper.getInstance(mContext).dropTable();
                         BmobUser.logOut(mContext);
-                        AppApplication.setUser(null);
+                        AppApplication.sUser=null;
                         startActivity(new Intent(mContext, LoginActivity.class));
                         mContext.finish();
                     }

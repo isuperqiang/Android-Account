@@ -55,7 +55,6 @@ public class UserActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTitle("我的资料");
         showBackwardView(true);
-        showDivider(true);
         mUsername.setText(BmobUser.getCurrentUser(this).getUsername());
         File photo = new File(BmobPro.getInstance(UserActivity.this).getCacheDownloadDir() +
                 File.separator + BmobUser.getCurrentUser(this, User.class).getPicture());
@@ -112,7 +111,7 @@ public class UserActivity extends BaseActivity {
             break;
             case R.id.btn_logout: {
                 BmobUser.logOut(this);
-                AppApplication.setUser(null);
+                AppApplication.sUser=null;
                 startActivity(new Intent(this, LoginActivity.class));
                 sendBroadcast(new Intent(Constant.INTENT_FILTER));
                 finish();

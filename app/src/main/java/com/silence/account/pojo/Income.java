@@ -12,19 +12,19 @@ import java.util.Date;
  * Created by Silence on 2016/3/7 0007.
  * 收入实体类
  */
-@DatabaseTable(tableName = "income")
+@DatabaseTable(tableName = "ASincome")
 public class Income implements Parcelable {
-    @DatabaseField(generatedId = true, columnName = "id")
+    @DatabaseField(generatedId = true, columnName = "ASid")
     private int mId;              //主键
-    @DatabaseField(canBeNull = false, columnName = "date")
+    @DatabaseField(canBeNull = false, columnName = "ASdate")
     private Date mDate;         //日期
-    @DatabaseField(canBeNull = false, columnName = "amount")
+    @DatabaseField(canBeNull = false, columnName = "ASamount")
     private float mAmount;        //金额
-    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "categoryId")
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "AScategoryId")
     private IncomeCat mCategory;     //类别
-    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "userId")
+    @DatabaseField(canBeNull = false, foreign = true, foreignAutoRefresh = true, columnName = "ASuserId")
     private User mUser;             //用户
-    @DatabaseField(columnName = "note")
+    @DatabaseField(columnName = "ASnote")
     private String mNote;         //备注
 
     public Income() {

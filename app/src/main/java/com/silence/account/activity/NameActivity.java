@@ -33,7 +33,6 @@ public class NameActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTitle("编辑昵称");
         showBackwardView(true);
-        showDivider(true);
         mEtModifyUsername.setText(BmobUser.getCurrentUser(this).getUsername());
     }
 

@@ -12,13 +12,13 @@ import cn.bmob.v3.BmobUser;
  * Created by Silence on 2016/3/6 0006.
  * 用户实体类
  */
-@DatabaseTable(tableName = "user")
+@DatabaseTable(tableName = "ASuser")
 public class User extends BmobUser implements Parcelable {
-    @DatabaseField(generatedId = true, columnName = "id")
+    @DatabaseField(generatedId = true, columnName = "ASid")
     private int mId;
-    @DatabaseField(columnName = "name")  //昵称
+    @DatabaseField(columnName = "ASname")  //昵称
     private String mName;
-    @DatabaseField(columnName = "photo")
+    @DatabaseField(columnName = "ASphoto")
     private String mPicture;      //头像
 
     public User() {

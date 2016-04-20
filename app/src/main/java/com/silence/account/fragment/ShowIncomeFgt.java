@@ -73,7 +73,7 @@ public class ShowIncomeFgt extends ListFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_show_finance, container, false);
+        View view = inflater.inflate(R.layout.fragment_finance, container, false);
         ButterKnife.bind(this, view);
         mIncomeDao = new IncomeDao(getActivity());
         switch (mType) {

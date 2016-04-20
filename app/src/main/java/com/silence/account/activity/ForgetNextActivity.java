@@ -25,7 +25,6 @@ public class ForgetNextActivity extends BaseActivity {
         setContentView(R.layout.activity_forget_next);
         ButterKnife.bind(this);
         showBackwardView(true);
-        showDivider(true);
         String email = getIntent().getStringExtra(Constant.FORGET_PASS);
         String validateLabel = "<p>验证邮件已发送至<font color=\"#3f8ddb\">" + email + "</font>，请于1小时内登陆您的邮箱并处理。</p>";
         String hintLabel = "<p>没有收到验证邮件？<br/>&bull; 有可能被误判为垃圾邮件<br/>&bull; 若超过20分钟仍无法接收邮件，请重新提交申请。</p>";

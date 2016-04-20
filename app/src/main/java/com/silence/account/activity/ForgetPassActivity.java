@@ -36,7 +36,6 @@ public class ForgetPassActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTitle("找回密码");
         showBackwardView(true);
-        showDivider(true);
     }
 
     @OnClick(R.id.btn_pass_next)

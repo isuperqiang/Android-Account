@@ -35,7 +35,6 @@ public class RegisterActivity extends BaseActivity {
         ButterKnife.bind(this);
         setTitle(R.string.text_register);
         showBackwardView(true);
-        showDivider(true);
     }
 
     @OnClick(R.id.btn_register)
