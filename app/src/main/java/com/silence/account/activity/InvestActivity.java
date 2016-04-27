@@ -10,9 +10,14 @@ import android.widget.Spinner;
 
 import com.silence.account.R;
 import com.silence.account.application.AccountApplication;
+import com.silence.account.dao.IncomeCatDao;
+import com.silence.account.dao.IncomeDao;
 import com.silence.account.dao.InvestDao;
+import com.silence.account.pojo.Income;
+import com.silence.account.pojo.IncomeCat;
 import com.silence.account.pojo.Invest;
 import com.silence.account.utils.Constant;
+import com.silence.account.utils.DateUtils;
 import com.silence.account.utils.T;
 
 import java.util.Date;
@@ -57,7 +62,7 @@ public class InvestActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_add_invest)
-    public void onClick() {
+    public void investClick() {
         String amount = mEtInvestAmount.getText().toString().trim();
         float amount1 = Float.parseFloat(amount);
         if (TextUtils.isEmpty(amount)) {
@@ -83,8 +88,10 @@ public class InvestActivity extends BaseActivity {
         int year1 = Integer.parseInt(year);
         float earning = amount1 * year1 * rate1 / 100;
         Invest invest = new Invest(amount1, year1, rate1, mType, earning, new Date(), AccountApplication.sUser);
-        InvestDao investDao = new InvestDao(this);
-        if (investDao.addInvest(invest)) {
+        IncomeCat incomeCat = new IncomeCatDao(this).findInvest();
+        Income income = new Income(new Date(), earning, incomeCat, AccountApplication.sUser,
+                DateUtils.date2Str(new Date(), "yyyy-MM-dd") + ", 投资" + amount + "元, 期限" + year + "年");
+        if (new InvestDao(this).addInvest(invest) && new IncomeDao(this).addIncome(income)) {
             T.showShort(this, "添加成功");
             Intent intent = new Intent();
             intent.putExtra(Constant.INVEST, amount);

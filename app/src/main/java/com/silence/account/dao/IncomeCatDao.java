@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Silence on 2016/3/10 0010.
+ * Created by Silence on 2016/3/10.
  */
 public class IncomeCatDao {
     private Dao<IncomeCat, Integer> mDao;
@@ -60,6 +60,16 @@ public class IncomeCatDao {
             e.printStackTrace();
         }
         return row > 0;
+    }
+
+    public IncomeCat findInvest() {
+        List<IncomeCat> cats = null;
+        try {
+            cats = mDao.queryForEq("ASname", "投资收益");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cats == null ? null : cats.get(0);
     }
 
     public void initIncomeCat(User user) {
