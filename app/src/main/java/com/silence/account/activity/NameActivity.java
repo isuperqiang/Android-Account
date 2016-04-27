@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.silence.account.R;
+import com.silence.account.application.AccountApplication;
+import com.silence.account.dao.UserDao;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.T;
 import com.silence.account.view.NormalEditText;
@@ -37,7 +39,7 @@ public class NameActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_modify_username)
-    public void onClick() {
+    public void nameClick() {
         final String name = mEtModifyUsername.getText().toString().trim();
         if (!TextUtils.isEmpty(name)) {
             new AsyncTask<Void, Void, Void>() {
@@ -58,6 +60,9 @@ public class NameActivity extends BaseActivity {
                                     @Override
                                     public void onSuccess() {
                                         T.showShort(NameActivity.this, "更新用户名成功");
+                                        new UserDao(NameActivity.this).updateName(name, AccountApplication.sUser.getId());
+//                                        EventBus.getDefault().post("update_name");
+                                        AccountApplication.sUser.setName(name);
                                         Intent intent = new Intent();
                                         intent.putExtra(Constant.NEW_USERNAME, name);
                                         setResult(Activity.RESULT_OK, intent);

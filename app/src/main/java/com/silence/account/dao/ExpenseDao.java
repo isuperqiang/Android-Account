@@ -40,8 +40,8 @@ public class ExpenseDao {
         return row > 0;
     }
 
-    public float getPeriodSumExpense(Date start, Date end) {
-        List<Expense> expenses = getPeriodExpense(start, end);
+    public float getPeriodSumExpense(Date start, Date end, int userId) {
+        List<Expense> expenses = getPeriodExpense(start, end, userId);
         float sum = 0;
         if (expenses != null && expenses.size() > 0) {
             for (int i = 0; i < expenses.size(); i++) {
@@ -71,14 +71,14 @@ public class ExpenseDao {
         return row > 0;
     }
 
-    public List<ExpenseStatistics> getPeriodCatSumExpense(Date start, Date end) {
+    public List<ExpenseStatistics> getPeriodCatSumExpense(Date start, Date end, int userId) {
         List<ExpenseStatistics> expenseStatisticses = null;
         String sql = "select ASexpenseCat.ASname, ASexpenseCat.ASimage, sum(ASamount) sumCatIncome from ASexpense " +
                 ", ASexpenseCat where ASexpense.AScategoryId = ASexpenseCat.ASid and ASdate between ? and ? and " +
-                "AScategoryId in (select distinct(AScategoryId) from ASexpense) group by AScategoryId;";
+                "AScategoryId in (select distinct(AScategoryId) from ASexpense) and ASexpense.ASuserId=? group by AScategoryId;";
         SQLiteDatabase database = DBOpenHelper.getInstance(mContext).getReadableDatabase();
-        Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end)});
-        float sumExpense = getPeriodSumExpense(start, end);
+        Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end), String.valueOf(userId)});
+        float sumExpense = getPeriodSumExpense(start, end, userId);
         if (cursor.moveToFirst()) {
             expenseStatisticses = new ArrayList<>(cursor.getCount());
             do {
@@ -86,17 +86,17 @@ public class ExpenseDao {
                 int imageId = cursor.getInt(1);
                 float sumCat = cursor.getFloat(2);
                 expenseStatisticses.add(new ExpenseStatistics(new ExpenseCat(imageId, categoryName),
-                        sumCat, FormatUtils.formatFloat("#.0",sumCat / sumExpense * 100)));
+                        sumCat, FormatUtils.formatFloat("#.0", sumCat / sumExpense * 100)));
             } while (cursor.moveToNext());
         }
         cursor.close();
         return expenseStatisticses;
     }
 
-    public List<Expense> getPeriodExpense(Date start, Date end) {
+    public List<Expense> getPeriodExpense(Date start, Date end, int userId) {
         List<Expense> expenses = null;
         try {
-            expenses = mDao.queryBuilder().where().between("ASdate", start, end).query();
+            expenses = mDao.queryBuilder().where().between("ASdate", start, end).and().eq("ASuserId", userId).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

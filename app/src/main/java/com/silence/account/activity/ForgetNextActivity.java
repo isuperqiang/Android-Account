@@ -33,7 +33,7 @@ public class ForgetNextActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_validate)
-    public void onClick() {
+    public void nextClick() {
         startActivity(new Intent(this, LoginActivity.class));
     }
 }

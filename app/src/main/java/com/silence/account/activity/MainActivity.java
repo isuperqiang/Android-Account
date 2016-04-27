@@ -18,10 +18,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.silence.account.R;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.UserDao;
-import com.silence.account.fragment.AccountFragment;
 import com.silence.account.fragment.DetailFragment;
+import com.silence.account.fragment.InvestFragment;
 import com.silence.account.fragment.LineFragment;
 import com.silence.account.fragment.MineFragment;
 import com.silence.account.fragment.PieFragment;
@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     RadioGroup mRadioGpTab;
     private long exitTime;
     private FragmentManager mFragmentManager;
-    private AccountFragment mAccountFragment;
+    private InvestFragment mInvestFragment;
     private DetailFragment mDetailFragment;
     private MineFragment mMineFragment;
     private PieFragment mPieFragment;
@@ -52,7 +52,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         ButterKnife.bind(this);
         ShareSDK.initSDK(this);
         mRadioGpTab.setOnCheckedChangeListener(this);
-        AppApplication.sUser = new UserDao(this).getCurrentUser(BmobUser.getCurrentUser(getApplicationContext()).getUsername());
+        AccountApplication.sUser = new UserDao(this).getCurrentUser(BmobUser.getCurrentUser(getApplicationContext()).getUsername());
         mFragmentManager = getSupportFragmentManager();
         ((RadioButton) (mRadioGpTab.getChildAt(0))).setChecked(true);
         registerReceiver(mBroadcastReceiver, new IntentFilter(Constant.INTENT_FILTER));
@@ -74,8 +74,8 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if (mDetailFragment != null && mDetailFragment.isVisible()) {
             transaction.hide(mDetailFragment);
         }
-        if (mAccountFragment != null && mAccountFragment.isVisible()) {
-            transaction.hide(mAccountFragment);
+        if (mInvestFragment != null && mInvestFragment.isVisible()) {
+            transaction.hide(mInvestFragment);
         }
         if (mMineFragment != null && mMineFragment.isVisible()) {
             transaction.hide(mMineFragment);
@@ -120,11 +120,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     switchFragment(mDetailFragment);
                     break;
                 case R.id.radio_btn_account:
-                    if (mAccountFragment == null) {
-                        mAccountFragment = new AccountFragment();
+                    if (mInvestFragment == null) {
+                        mInvestFragment = new InvestFragment();
                     }
                     switchTitleBar(R.string.tab_invest, false, false, 0);
-                    switchFragment(mAccountFragment);
+                    switchFragment(mInvestFragment);
                     break;
                 case R.id.radio_btn_chart:
                     switchChart(mChartType);

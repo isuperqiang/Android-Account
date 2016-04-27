@@ -25,7 +25,7 @@ import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.silence.account.R;
 import com.silence.account.activity.AddCategoryAty;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.adapter.GridExpCatAdapter;
 import com.silence.account.dao.ExpenseCatDao;
 import com.silence.account.dao.ExpenseDao;
@@ -113,7 +113,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
             mIsUpdateExpense = false;
             mDate = new Date();
             mExpense = new Expense();
-            mExpense.setUser(AppApplication.sUser);
+            mExpense.setUser(AccountApplication.sUser);
             mExpense.setDate(mDate);
             mExpense.setCategory((ExpenseCat) mCatAdapter.getItem(0));
         }
@@ -164,9 +164,9 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     private List<ExpenseCat> getCategory() {
-        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat((AppApplication.sUser.getId()));
-        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加", AppApplication.sUser));
-        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除", AppApplication.sUser));
+        List<ExpenseCat> cats = mExpenseCatDao.getExpenseCat((AccountApplication.sUser.getId()));
+        cats.add(new ExpenseCat(R.mipmap.jiahao_bai, "添加", AccountApplication.sUser));
+        cats.add(new ExpenseCat(R.mipmap.jianhao_bai, "删除", AccountApplication.sUser));
         return cats;
     }
 
@@ -198,7 +198,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     @OnClick({R.id.ll_expense_cat, R.id.label_expense_time, R.id.icon_expense_speak, R.id.btn_expense_save})
-    public void onClick(View view) {
+    public void expenseClick(View view) {
         switch (view.getId()) {
             case R.id.ll_expense_cat: {
                 if (mPopupWindow.isShowing()) {

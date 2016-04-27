@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.silence.account.R;
 import com.silence.account.adapter.CommonAdapter;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseCatDao;
 import com.silence.account.dao.IncomeCatDao;
 import com.silence.account.pojo.ExpenseCat;
@@ -127,7 +127,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
             if (TextUtils.equals(mType, Constant.TYPE_INCOME)) {
                 IncomeCatDao incomeCatDao = new IncomeCatDao(this);
                 if (mIncomeCat != null) {
-                    if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AppApplication.sUser))) {
+                    if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(), name, mResId, AccountApplication.sUser))) {
                         T.showShort(this, "修改成功");
                         setResult(RESULT_OK);
                         finish();
@@ -135,7 +135,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                         T.showShort(this, "修改失败");
                     }
                 } else {
-                    if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AppApplication.sUser))) {
+                    if (incomeCatDao.addCategory(new IncomeCat(mResId, name, AccountApplication.sUser))) {
                         T.showShort(this, "保存成功");
                         setResult(RESULT_OK);
                         finish();
@@ -147,7 +147,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                 ExpenseCatDao expenseCatDao = new ExpenseCatDao(this);
                 L.i("expense cat");
                 if (mExpenseCat != null) {
-                    if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AppApplication.sUser))) {
+                    if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(), name, mResId, AccountApplication.sUser))) {
                         T.showShort(this, "修改成功");
                         setResult(RESULT_OK);
                         finish();
@@ -155,7 +155,7 @@ public class AddCategoryAty extends BaseActivity implements AdapterView.OnItemCl
                         T.showShort(this, "修改失败");
                     }
                 } else {
-                    if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AppApplication.sUser))) {
+                    if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AccountApplication.sUser))) {
                         T.showShort(this, "保存成功");
                         setResult(RESULT_OK);
                         finish();

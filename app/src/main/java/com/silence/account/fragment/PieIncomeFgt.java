@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.borax12.materialdaterangepicker.date.DatePickerDialog;
 import com.silence.account.R;
 import com.silence.account.adapter.CommonAdapter;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.pojo.IncomeStatistics;
 import com.silence.account.utils.DateUtils;
@@ -102,14 +103,14 @@ public class PieIncomeFgt extends BaseFragment implements
         }
         mLabelExpenseDateChart.setText(label);
         mPieChart.setOnValueTouchListener(new ValueTouchListener());
-        mIncomeStatisticses = mIncomeDao.getPeriodCatSumExpense(start, end);
+        mIncomeStatisticses = mIncomeDao.getPeriodCatSumExpense(start, end, AccountApplication.sUser.getId());
         if (mIncomeStatisticses != null && mIncomeStatisticses.size() > 0) {
             List<SliceValue> sliceValueList = new ArrayList<>(mIncomeStatisticses.size());
             mPieChartData.setCenterText1("总收入");
-            float sumExpense = mIncomeDao.getPeriodSumIncome(start, end);
+            float sumExpense = mIncomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
             mPieChartData.setCenterText2(String.valueOf(sumExpense));
             for (int i = 0, j = mIncomeStatisticses.size(); i < j; i++) {
-                sliceValueList.add(new SliceValue(mIncomeStatisticses.get(i).getSum(), ChartUtils.pickColor()));
+                sliceValueList.add(new SliceValue(mIncomeStatisticses.get(i).getSum(), ChartUtils.nextColor()));
             }
             mPieChartData.setValues(sliceValueList);
         } else {
@@ -146,7 +147,7 @@ public class PieIncomeFgt extends BaseFragment implements
     }
 
     @OnClick({R.id.icon_expense_chart_left, R.id.label_expense_date_chart, R.id.icon_expense_chart_right})
-    public void onClick(View view) {
+    public void pieIncomeClick(View view) {
         switch (view.getId()) {
             case R.id.icon_expense_chart_left: {
                 mMonth--;

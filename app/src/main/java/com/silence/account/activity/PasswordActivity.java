@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.silence.account.R;
+import com.silence.account.application.AccountApplication;
+import com.silence.account.dao.UserDao;
 import com.silence.account.utils.MD5Encrypt;
 import com.silence.account.utils.T;
 import com.silence.account.view.PasswordEditText;
@@ -36,7 +38,7 @@ public class PasswordActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_modify_pass)
-    public void onClick() {
+    public void passClick() {
         final String newPass = mEtModifyNewPass.getText().toString().trim();
         final String oldPass = mEtModifyOldpass.getText().toString().trim();
         if (!TextUtils.isEmpty(newPass) && !TextUtils.isEmpty(oldPass)) {
@@ -54,6 +56,7 @@ public class PasswordActivity extends BaseActivity {
                                         secretOldPass, MD5Encrypt.MD5Encode(newPass), new UpdateListener() {
                                             @Override
                                             public void onSuccess() {
+                                                new UserDao(PasswordActivity.this).updatePass(newPass, AccountApplication.sUser.getId());
                                                 T.showShort(getApplicationContext(), "密码修改成功");
                                                 finish();
                                             }

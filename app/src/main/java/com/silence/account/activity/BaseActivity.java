@@ -13,7 +13,7 @@ import com.silence.account.R;
 
 
 /**
- * Created by Silence on 2016/4/5 0005.
+ * Created by Silence on 2016/4/5
  */
 public class BaseActivity extends FragmentActivity implements View.OnClickListener {
     private ImageButton mBackwardButton;
@@ -124,6 +124,7 @@ public class BaseActivity extends FragmentActivity implements View.OnClickListen
         onContentChanged();
     }
 
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_top_backward:

@@ -38,7 +38,7 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_register)
-    public void onClick() {
+    public void registerClick() {
         final String name = mRegUsername.getText().toString().trim();
         final String pass = mRegPass.getText().toString().trim();
         final String email = mRegEmail.getText().toString().trim();

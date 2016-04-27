@@ -1,1 +1,1 @@
-include ':app', ':slidedatetimepicker', ':swipemenu', ':hellocharts', ':pagerslidingtabstrip', ':pagerslidingtabstrip', ':daterangepicker', ':sharesdk', ':onekeyshare'
+include ':app', ':slidedatetimepicker', ':sharesdk', ':onekeyshare', ':pagerslidingtabstrip', ':swipemenulistview', ':daterangepicker'

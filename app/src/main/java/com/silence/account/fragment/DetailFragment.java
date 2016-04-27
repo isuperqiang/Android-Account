@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.silence.account.R;
 import com.silence.account.activity.ItemActivity;
 import com.silence.account.activity.RecordActivity;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseDao;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.utils.Constant;
@@ -67,28 +68,28 @@ public class DetailFragment extends BaseFragment {
     private void updateToday() {
         Date start = DateUtils.getTodayStart();
         Date end = DateUtils.getTodayEnd();
-        float incomes = mIncomeDao.getPeriodSumIncome(start, end);
+        float incomes = mIncomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
         mTextTodayIncome.setText(String.valueOf(incomes));
-        float expenses = mExpenseDao.getPeriodSumExpense(start, end);
+        float expenses = mExpenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
         mTextTodayExpense.setText(String.valueOf(expenses));
     }
 
     private void updateWeek() {
         Date start = DateUtils.getWeekStart();
         Date end = DateUtils.getWeekEnd();
-        float incomes = mIncomeDao.getPeriodSumIncome(start, end);
+        float incomes = mIncomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
         mTextWeekIncome.setText(String.valueOf(incomes));
-        float expenses = mExpenseDao.getPeriodSumExpense(start, end);
+        float expenses = mExpenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
         mTextWeekExpense.setText(String.valueOf(expenses));
     }
 
     private void updateMonth() {
         Date start = DateUtils.getMonthStart();
         Date end = DateUtils.getMonthEnd();
-        float incomes = mIncomeDao.getPeriodSumIncome(start, end);
+        float incomes = mIncomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
         mTextDetailIncome.setText(String.valueOf(incomes));
         mTextMonthIncome.setText(String.valueOf(incomes));
-        float expenses = mExpenseDao.getPeriodSumExpense(start, end);
+        float expenses = mExpenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
         mTextMonthExpense.setText(String.valueOf(expenses));
         mTextDetailExpense.setText(String.valueOf(expenses));
         float balance = incomes - expenses;
@@ -108,7 +109,7 @@ public class DetailFragment extends BaseFragment {
     }
 
     @OnClick({R.id.btn_record, R.id.ll_detail_today, R.id.ll_detail_week, R.id.ll_detail_month})
-    public void onClick(View view) {
+    public void detailClick(View view) {
         switch (view.getId()) {
             case R.id.ll_detail_today: {
                 Intent intent = new Intent(getActivity(), ItemActivity.class);

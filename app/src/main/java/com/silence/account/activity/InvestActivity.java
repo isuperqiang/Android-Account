@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.silence.account.R;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.InvestDao;
 import com.silence.account.pojo.Invest;
 import com.silence.account.utils.Constant;
@@ -81,8 +82,7 @@ public class InvestActivity extends BaseActivity {
         float rate1 = Float.parseFloat(rate);
         int year1 = Integer.parseInt(year);
         float earning = amount1 * year1 * rate1 / 100;
-        Invest invest = new Invest(amount1, year1, rate1, mType, earning, new Date());
-        invest.setEarning(earning);
+        Invest invest = new Invest(amount1, year1, rate1, mType, earning, new Date(), AccountApplication.sUser);
         InvestDao investDao = new InvestDao(this);
         if (investDao.addInvest(invest)) {
             T.showShort(this, "添加成功");

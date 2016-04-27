@@ -1,4 +1,4 @@
-package com.silence.swipemenu;
+package com.silence.swipemenulistview;
 
 import org.junit.Test;
 

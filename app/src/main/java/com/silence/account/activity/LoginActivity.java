@@ -53,20 +53,19 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 String name = mEtLoginName.getText().toString().trim();
-                String pass = mEtLoginPass.getText().toString().trim();
+                final String pass = mEtLoginPass.getText().toString().trim();
                 if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass)) {
                     BmobUser.loginByAccount(this, name, MD5Encrypt.MD5Encode(pass), new LogInListener<User>() {
                         @Override
                         public void done(final User user, BmobException e) {
                             if (user != null) {
                                 new AsyncTask<Void, Void, Void>() {
-
                                     @Override
                                     protected Void doInBackground(Void... params) {
                                         UserDao userDao = new UserDao(LoginActivity.this);
                                         User curUser = userDao.getCurrentUser(user.getUsername());
                                         if (curUser == null) {
-                                            userDao.addUser(new User(user.getUsername(), user.getPicture()));
+                                            userDao.addUser(new User(user.getUsername(), pass, user.getEmail(), user.getPicture()));
                                             curUser = userDao.getCurrentUser(user.getUsername());
                                             IncomeCatDao incomeCatDao = new IncomeCatDao(LoginActivity.this);
                                             incomeCatDao.initIncomeCat(curUser);

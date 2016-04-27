@@ -5,12 +5,11 @@
       <module fileurl="file://$PROJECT_DIR$/Account.iml" filepath="$PROJECT_DIR$/Account.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/daterangepicker/daterangepicker.iml" filepath="$PROJECT_DIR$/daterangepicker/daterangepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/hellocharts/hellocharts.iml" filepath="$PROJECT_DIR$/hellocharts/hellocharts.iml" />
       <module fileurl="file://$PROJECT_DIR$/onekeyshare/onekeyshare.iml" filepath="$PROJECT_DIR$/onekeyshare/onekeyshare.iml" />
       <module fileurl="file://$PROJECT_DIR$/pagerslidingtabstrip/pagerslidingtabstrip.iml" filepath="$PROJECT_DIR$/pagerslidingtabstrip/pagerslidingtabstrip.iml" />
       <module fileurl="file://$PROJECT_DIR$/sharesdk/sharesdk.iml" filepath="$PROJECT_DIR$/sharesdk/sharesdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/slidedatetimepicker/slidedatetimepicker.iml" filepath="$PROJECT_DIR$/slidedatetimepicker/slidedatetimepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/swipemenu/swipemenu.iml" filepath="$PROJECT_DIR$/swipemenu/swipemenu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" filepath="$PROJECT_DIR$/swipemenulistview/swipemenulistview.iml" />
     </modules>
   </component>
 </project>

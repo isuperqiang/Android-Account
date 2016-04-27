@@ -9,7 +9,7 @@ public class BaseFragment extends Fragment {
 //    @Override
 //    public void onDestroy() {
 //        super.onDestroy();
-//        RefWatcher refWatcher = AppApplication.getRefWatcher(getActivity());
+//        RefWatcher refWatcher = AccountApplication.getRefWatcher(getActivity());
 //        refWatcher.watch(this);
 //    }
 }

@@ -25,7 +25,7 @@ import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.silence.account.R;
 import com.silence.account.activity.AddCategoryAty;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.adapter.GridInCatAdapter;
 import com.silence.account.dao.IncomeCatDao;
 import com.silence.account.dao.IncomeDao;
@@ -112,7 +112,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
             mIncome = new Income();
             mDate = new Date();
             mIncome.setDate(mDate);
-            mIncome.setUser(AppApplication.sUser);
+            mIncome.setUser(AccountApplication.sUser);
             mIncome.setCategory((IncomeCat) mCatAdapter.getItem(0));
         }
         mEtIncomeTime.setText(DateUtils.date2Str(mDate));
@@ -155,9 +155,9 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     private List<IncomeCat> getCategory() {
-        List<IncomeCat> cats = mIncomeCatDao.getIncomeCat(AppApplication.sUser.getId());
-        cats.add(new IncomeCat(R.mipmap.jiahao_bai, "添加", AppApplication.sUser));
-        cats.add(new IncomeCat(R.mipmap.jianhao_bai, "删除", AppApplication.sUser));
+        List<IncomeCat> cats = mIncomeCatDao.getIncomeCat(AccountApplication.sUser.getId());
+        cats.add(new IncomeCat(R.mipmap.jiahao_bai, "添加", AccountApplication.sUser));
+        cats.add(new IncomeCat(R.mipmap.jianhao_bai, "删除", AccountApplication.sUser));
         return cats;
     }
 
@@ -194,7 +194,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     @OnClick({R.id.label_income_time, R.id.icon_income_speak, R.id.ll_income_cat, R.id.btn_income_save})
-    public void onClick(View view) {
+    public void incomeClick(View view) {
         switch (view.getId()) {
             case R.id.label_income_time: {
                 if (mOnTimePickListener != null) {

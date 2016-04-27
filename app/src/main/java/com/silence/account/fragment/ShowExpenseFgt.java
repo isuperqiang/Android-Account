@@ -19,6 +19,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.silence.account.R;
 import com.silence.account.activity.RecordActivity;
 import com.silence.account.adapter.ExpenseSwipeAdapter;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseDao;
 import com.silence.account.pojo.Expense;
 import com.silence.account.utils.Constant;
@@ -76,15 +77,18 @@ public class ShowExpenseFgt extends ListFragment {
         mExpenseDao = new ExpenseDao(getActivity());
         switch (mType) {
             case Constant.TYPE_MONTH:
-                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getMonthStart(),
+                        DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                 mExpenseSwipeAdapter = new ExpenseSwipeAdapter(getActivity(), mExpenses, false);
                 break;
             case Constant.TYPE_TODAY:
-                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getTodayStart(),
+                        DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                 mExpenseSwipeAdapter = new ExpenseSwipeAdapter(getActivity(), mExpenses, true);
                 break;
             case Constant.TYPE_WEEK:
-                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getWeekStart(),
+                        DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                 mExpenseSwipeAdapter = new ExpenseSwipeAdapter(getActivity(), mExpenses, false);
                 break;
             default:
@@ -125,13 +129,16 @@ public class ShowExpenseFgt extends ListFragment {
             float expense = 0;
             switch (mType) {
                 case Constant.TYPE_MONTH:
-                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getMonthStart(),
+                            DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_TODAY:
-                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getTodayStart(),
+                            DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_WEEK:
-                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                    expense = mExpenseDao.getPeriodSumExpense(DateUtils.getWeekStart(),
+                            DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                     break;
                 default:
                     break;
@@ -145,13 +152,16 @@ public class ShowExpenseFgt extends ListFragment {
         if (TextUtils.equals(message, "expense_updated") && mExpenseSwipeAdapter != null) {
             switch (mType) {
                 case Constant.TYPE_MONTH:
-                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getMonthStart(),
+                            DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_TODAY:
-                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getTodayStart(),
+                            DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_WEEK:
-                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                    mExpenses = mExpenseDao.getPeriodExpense(DateUtils.getWeekStart(),
+                            DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                     break;
                 default:
                     break;

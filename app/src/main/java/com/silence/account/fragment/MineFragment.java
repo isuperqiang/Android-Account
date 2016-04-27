@@ -18,7 +18,7 @@ import com.silence.account.activity.AboutActivity;
 import com.silence.account.activity.LoginActivity;
 import com.silence.account.activity.MainActivity;
 import com.silence.account.activity.UserActivity;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.pojo.User;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.DBOpenHelper;
@@ -52,6 +52,7 @@ public class MineFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = (MainActivity) getActivity();
+//        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -73,21 +74,30 @@ public class MineFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void invalidateUI(String msg) {
+//        if (TextUtils.equals(msg, "update_name")) {
+//            mUsername.setText(AccountApplication.sUser.getName());
+//        }
+//    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+    }
+
     @OnClick({R.id.ll_me_user, R.id.ll_me_setting, R.id.ll_me_reminder, R.id.ll_me_share,
             R.id.ll_me_about, R.id.ll_me_check, R.id.ll_me_init})
-    public void onClick(View view) {
+    public void mineClick(View view) {
         switch (view.getId()) {
             case R.id.ll_me_user: {
                 startActivityForResult(new Intent(mContext, UserActivity.class), UPDATE_USER);
             }
             break;
-            case R.id.ll_me_setting: {
-
-            }
+            case R.id.ll_me_setting:
             break;
-            case R.id.ll_me_reminder: {
-
-            }
+            case R.id.ll_me_reminder:
             break;
             case R.id.ll_me_init: {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -100,7 +110,7 @@ public class MineFragment extends BaseFragment {
                         //在这里初始化所有数据表，并退出登录
                         DBOpenHelper.getInstance(mContext).dropTable();
                         BmobUser.logOut(mContext);
-                        AppApplication.sUser=null;
+                        AccountApplication.sUser = null;
                         startActivity(new Intent(mContext, LoginActivity.class));
                         mContext.finish();
                     }

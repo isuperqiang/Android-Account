@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Silence on 2016/3/10 0010.
+ * Created by Silence on 2016/3/10.
  */
 public class ExpenseCatDao {
     private Dao<ExpenseCat, Integer> mDao;

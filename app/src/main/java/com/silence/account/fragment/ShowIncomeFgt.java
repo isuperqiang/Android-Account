@@ -19,6 +19,7 @@ import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.silence.account.R;
 import com.silence.account.activity.RecordActivity;
 import com.silence.account.adapter.IncomeSwipeAdapter;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.pojo.Income;
 import com.silence.account.utils.Constant;
@@ -78,15 +79,18 @@ public class ShowIncomeFgt extends ListFragment {
         mIncomeDao = new IncomeDao(getActivity());
         switch (mType) {
             case Constant.TYPE_MONTH:
-                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getMonthStart(),
+                        DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                 mIncomeSwipeAdapter = new IncomeSwipeAdapter(getActivity(), mIncomes, false);
                 break;
             case Constant.TYPE_TODAY:
-                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getTodayStart(),
+                        DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                 mIncomeSwipeAdapter = new IncomeSwipeAdapter(getActivity(), mIncomes, true);
                 break;
             case Constant.TYPE_WEEK:
-                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getWeekStart(),
+                        DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                 mIncomeSwipeAdapter = new IncomeSwipeAdapter(getActivity(), mIncomes, false);
                 break;
             default:
@@ -127,13 +131,16 @@ public class ShowIncomeFgt extends ListFragment {
             float income = 0;
             switch (mType) {
                 case Constant.TYPE_MONTH:
-                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getMonthStart(),
+                            DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_TODAY:
-                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getTodayStart(),
+                            DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_WEEK:
-                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                    income = mIncomeDao.getPeriodSumIncome(DateUtils.getWeekStart(),
+                            DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                     break;
                 default:
                     break;
@@ -147,13 +154,16 @@ public class ShowIncomeFgt extends ListFragment {
         if (TextUtils.equals(message, "income_updated") && mOnIncomeChangeListener != null) {
             switch (mType) {
                 case Constant.TYPE_MONTH:
-                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getMonthStart(),
+                            DateUtils.getMonthEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_TODAY:
-                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getTodayStart(), DateUtils.getTodayEnd());
+                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getTodayStart(),
+                            DateUtils.getTodayEnd(), AccountApplication.sUser.getId());
                     break;
                 case Constant.TYPE_WEEK:
-                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getWeekStart(), DateUtils.getWeekEnd());
+                    mIncomes = mIncomeDao.getPeriodIncomes(DateUtils.getWeekStart(),
+                            DateUtils.getWeekEnd(), AccountApplication.sUser.getId());
                     break;
                 default:
                     break;

@@ -49,8 +49,8 @@ public class IncomeDao {
         return row > 0;
     }
 
-    public float getPeriodSumIncome(Date start, Date end) {
-        List<Income> incomes = getPeriodIncomes(start, end);
+    public float getPeriodSumIncome(Date start, Date end, int userId) {
+        List<Income> incomes = getPeriodIncomes(start, end, userId);
         float sum = 0;
         if (incomes != null && incomes.size() > 0) {
             for (int i = 0; i < incomes.size(); i++) {
@@ -60,14 +60,14 @@ public class IncomeDao {
         return sum;
     }
 
-    public List<IncomeStatistics> getPeriodCatSumExpense(Date start, Date end) {
+    public List<IncomeStatistics> getPeriodCatSumExpense(Date start, Date end, int userId) {
         List<IncomeStatistics> incomeStatisticses = null;
         String sql = "select ASincomeCat.ASname, ASincomeCat.ASimage, sum(ASamount) sumCatIncome from ASincome " +
                 ", ASincomeCat where ASincome.AScategoryId = ASincomeCat.ASid and ASdate between ? and ? and " +
-                "AScategoryId in (select distinct(AScategoryId) from ASincome) group by AScategoryId;";
+                "AScategoryId in (select distinct(AScategoryId) from ASincome) and ASincome.ASuserId=? group by AScategoryId;";
         SQLiteDatabase database = DBOpenHelper.getInstance(mContext).getReadableDatabase();
-        Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end)});
-        float sumExpense = getPeriodSumIncome(start, end);
+        Cursor cursor = database.rawQuery(sql, new String[]{DateUtils.date2Str(start), DateUtils.date2Str(end), String.valueOf(userId)});
+        float sumExpense = getPeriodSumIncome(start, end, userId);
         if (cursor.moveToFirst()) {
             incomeStatisticses = new ArrayList<>(cursor.getCount());
             do {
@@ -75,17 +75,17 @@ public class IncomeDao {
                 int imageId = cursor.getInt(1);
                 float sumCat = cursor.getFloat(2);
                 incomeStatisticses.add(new IncomeStatistics(new IncomeCat(imageId, categoryName),
-                        sumCat, FormatUtils.formatFloat("#.0",sumCat / sumExpense * 100)));
+                        sumCat, FormatUtils.formatFloat("#.0", sumCat / sumExpense * 100)));
             } while (cursor.moveToNext());
         }
         cursor.close();
         return incomeStatisticses;
     }
 
-    public List<Income> getPeriodIncomes(Date start, Date end) {
+    public List<Income> getPeriodIncomes(Date start, Date end, int userId) {
         List<Income> incomes = null;
         try {
-            incomes = mDao.queryBuilder().where().between("ASdate", start, end).query();
+            incomes = mDao.queryBuilder().where().between("ASdate", start, end).and().eq("ASuserId", userId).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

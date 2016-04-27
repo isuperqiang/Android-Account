@@ -11,12 +11,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/daterangepicker" />
-            <option value="$PROJECT_DIR$/hellocharts" />
             <option value="$PROJECT_DIR$/onekeyshare" />
             <option value="$PROJECT_DIR$/pagerslidingtabstrip" />
             <option value="$PROJECT_DIR$/sharesdk" />
             <option value="$PROJECT_DIR$/slidedatetimepicker" />
-            <option value="$PROJECT_DIR$/swipemenu" />
+            <option value="$PROJECT_DIR$/swipemenulistview" />
           </set>
         </option>
         <option name="myModules">
@@ -24,12 +23,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/daterangepicker" />
-            <option value="$PROJECT_DIR$/hellocharts" />
             <option value="$PROJECT_DIR$/onekeyshare" />
             <option value="$PROJECT_DIR$/pagerslidingtabstrip" />
             <option value="$PROJECT_DIR$/sharesdk" />
             <option value="$PROJECT_DIR$/slidedatetimepicker" />
-            <option value="$PROJECT_DIR$/swipemenu" />
+            <option value="$PROJECT_DIR$/swipemenulistview" />
           </set>
         </option>
       </GradleProjectSettings>

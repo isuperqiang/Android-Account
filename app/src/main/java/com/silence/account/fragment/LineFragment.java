@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.silence.account.R;
 import com.silence.account.adapter.AllYearStatisticAdapter;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseDao;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.pojo.AllYearStatistics;
@@ -86,8 +87,8 @@ public class LineFragment extends Fragment {
         for (int j = 0; j < numberOfPoints; j++) {
             Date start = DateUtils.getMonthStart(mYear, j);
             Date end = DateUtils.getMonthEnd(mYear, j);
-            float sumIncome = mIncomeDao.getPeriodSumIncome(start, end);
-            float sumExpense = mExpenseDao.getPeriodSumExpense(start, end);
+            float sumIncome = mIncomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
+            float sumExpense = mExpenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
             float sumBalance = sumIncome - sumExpense;
             randomNumbersTab[0][j] = sumIncome;
             randomNumbersTab[1][j] = sumExpense;
@@ -161,7 +162,7 @@ public class LineFragment extends Fragment {
     }
 
     @OnClick({R.id.icon_line_chart_left, R.id.icon_line_chart_right})
-    public void onClick(View view) {
+    public void lineClick(View view) {
         switch (view.getId()) {
             case R.id.icon_line_chart_left: {
                 mYear--;

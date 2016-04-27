@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.silence.account.R;
 import com.silence.account.activity.InvestActivity;
 import com.silence.account.adapter.CommonAdapter;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseDao;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.dao.InvestDao;
@@ -35,7 +36,7 @@ import butterknife.OnClick;
 /**
  * Created by Silence on 2016/3/7 0007.
  */
-public class AccountFragment extends BaseFragment {
+public class InvestFragment extends BaseFragment {
 
     @Bind(R.id.label_invest_remain)
     TextView mLabelInvestRemain;
@@ -68,7 +69,7 @@ public class AccountFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         mInvestDao = new InvestDao(mContext);
         getRemain();
-        List<Invest> invest = mInvestDao.findInvest(DateUtils.getMonthStart(), DateUtils.getMonthEnd());
+        List<Invest> invest = mInvestDao.findInvest(DateUtils.getMonthStart(), DateUtils.getMonthEnd(),AccountApplication.sUser.getId());
         mSumInvested = 0;
         for (int i = 0; i < invest.size(); i++) {
             mSumInvested += invest.get(i).getAmount();
@@ -99,8 +100,8 @@ public class AccountFragment extends BaseFragment {
     private void getRemain() {
         Date start = DateUtils.getMonthStart();
         Date end = DateUtils.getMonthEnd();
-        float incomes = new IncomeDao(mContext).getPeriodSumIncome(start, end);
-        float expenses = new ExpenseDao(mContext).getPeriodSumExpense(start, end);
+        float incomes = new IncomeDao(mContext).getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
+        float expenses = new ExpenseDao(mContext).getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
         mRemain = incomes - expenses;
         mLabelInvestRemain.setText(String.valueOf(mRemain));
     }
@@ -137,7 +138,6 @@ public class AccountFragment extends BaseFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_INVEST && resultCode == Activity.RESULT_OK) {
             String stringExtra = data.getStringExtra(Constant.INVEST);
-            mLabelInvestRemain.setText(stringExtra);
             mCommonAdapter.setData(mInvestDao.findAllInvest());
             mSumInvested += Float.parseFloat(stringExtra);
             mIdle = mRemain - mSumInvested;
@@ -152,7 +152,7 @@ public class AccountFragment extends BaseFragment {
     }
 
     @OnClick(R.id.btn_invest)
-    public void onClick() {
+    public void investClick() {
         Intent intent = new Intent(mContext, InvestActivity.class);
         intent.putExtra(Constant.INVEST, mIdle);
         startActivityForResult(intent, REQUEST_INVEST);

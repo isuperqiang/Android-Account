@@ -16,7 +16,7 @@ import com.bmob.BmobPro;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 import com.silence.account.R;
-import com.silence.account.application.AppApplication;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.pojo.User;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.FileUtils;
@@ -62,7 +62,7 @@ public class UserActivity extends BaseActivity {
     }
 
     @OnClick({R.id.ll_info_photo, R.id.ll_info_name, R.id.ll_info_pass, R.id.btn_logout})
-    public void onClick(View view) {
+    public void userClick(View view) {
         switch (view.getId()) {
             case R.id.ll_info_photo: {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -111,7 +111,7 @@ public class UserActivity extends BaseActivity {
             break;
             case R.id.btn_logout: {
                 BmobUser.logOut(this);
-                AppApplication.sUser=null;
+                AccountApplication.sUser = null;
                 startActivity(new Intent(this, LoginActivity.class));
                 sendBroadcast(new Intent(Constant.INTENT_FILTER));
                 finish();
@@ -122,7 +122,6 @@ public class UserActivity extends BaseActivity {
 
     @Override
     protected void onBackward() {
-        L.i("user onBackward");
         Intent intent = new Intent();
         if (mNewName != null) {
             intent.putExtra(Constant.NEW_USERNAME, mNewName);

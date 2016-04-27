@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.silence.account.R;
+import com.silence.account.application.AccountApplication;
 import com.silence.account.dao.ExpenseDao;
 import com.silence.account.dao.IncomeDao;
 import com.silence.account.fragment.ShowExpenseFgt;
@@ -58,8 +59,8 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 setTitle("本月");
                 Date start = DateUtils.getMonthStart();
                 Date end = DateUtils.getMonthEnd();
-                mIncome = incomeDao.getPeriodSumIncome(start, end);
-                mExpense = expenseDao.getPeriodSumExpense(start, end);
+                mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
+                mExpense = expenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
@@ -71,8 +72,8 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 setTitle("今天");
                 Date start = DateUtils.getTodayStart();
                 Date end = DateUtils.getTodayEnd();
-                mIncome = incomeDao.getPeriodSumIncome(start, end);
-                mExpense = expenseDao.getPeriodSumExpense(start, end);
+                mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
+                mExpense = expenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
@@ -84,8 +85,8 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
                 setTitle("本周");
                 Date start = DateUtils.getWeekStart();
                 Date end = DateUtils.getWeekEnd();
-                mIncome = incomeDao.getPeriodSumIncome(start, end);
-                mExpense = expenseDao.getPeriodSumExpense(start, end);
+                mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
+                mExpense = expenseDao.getPeriodSumExpense(start, end, AccountApplication.sUser.getId());
                 mLabelShowExpense.setText(String.valueOf(mExpense));
                 mLabelShowIncome.setText(String.valueOf(mIncome));
                 mLabelShowRemain.setText(String.valueOf(mIncome - mExpense));
@@ -106,7 +107,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
     }
 
     @OnClick({R.id.btn_show_income, R.id.btn_show_expense})
-    public void onClick(View view) {
+    public void itemClick(View view) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         hideAll(transaction);
         switch (view.getId()) {

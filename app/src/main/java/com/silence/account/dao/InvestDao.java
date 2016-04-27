@@ -60,10 +60,10 @@ public class InvestDao {
         return invests;
     }
 
-    public List<Invest> findInvest(Date start, Date end) {
+    public List<Invest> findInvest(Date start, Date end,int userId) {
         List<Invest> invests = null;
         try {
-            invests = mDao.queryBuilder().where().between("ASdate", start, end).query();
+            invests = mDao.queryBuilder().where().between("ASdate", start, end).and().eq("ASuserId",userId).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
