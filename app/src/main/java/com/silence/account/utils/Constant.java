@@ -20,4 +20,5 @@ public interface Constant {
     String UPDATE_CAT = "request_update_category";
     String INTENT_FILTER="com.silence.account.broadcast";
     String INVEST="com.silence.pojo.invset";
+    String ACTION_ALARM="com.silence.account.receiver";
 }

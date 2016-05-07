@@ -33,26 +33,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_me_setting"
-        style="@style/me_ll_style"
-        >
-
-        <ImageView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@mipmap/ico_setting"/>
-
-        <TextView
-            style="@style/me_text_style"
-            android:text="系统设置"/>
-
-        <ImageView
-            style="@style/image_more"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/ll_me_reminder"
         style="@style/me_ll_style"
         >

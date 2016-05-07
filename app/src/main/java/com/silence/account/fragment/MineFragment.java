@@ -1,18 +1,25 @@
 package com.silence.account.fragment;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bmob.BmobPro;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimeListener;
+import com.github.jjobes.slidedatetimepicker.SlideDateTimePicker;
 import com.silence.account.R;
 import com.silence.account.activity.AboutActivity;
 import com.silence.account.activity.LoginActivity;
@@ -20,12 +27,15 @@ import com.silence.account.activity.MainActivity;
 import com.silence.account.activity.UserActivity;
 import com.silence.account.application.AccountApplication;
 import com.silence.account.pojo.User;
+import com.silence.account.receiver.AlarmReceiver;
 import com.silence.account.utils.Constant;
 import com.silence.account.utils.DBOpenHelper;
+import com.silence.account.utils.DateUtils;
 import com.silence.account.utils.T;
 import com.silence.account.view.CircleImageView;
 
 import java.io.File;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,7 +62,6 @@ public class MineFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = (MainActivity) getActivity();
-//        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -74,20 +83,31 @@ public class MineFragment extends BaseFragment {
         ButterKnife.unbind(this);
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void invalidateUI(String msg) {
-//        if (TextUtils.equals(msg, "update_name")) {
-//            mUsername.setText(AccountApplication.sUser.getName());
-//        }
-//    }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.ll_me_user, R.id.ll_me_setting, R.id.ll_me_reminder, R.id.ll_me_share,
+    SlideDateTimeListener listener = new SlideDateTimeListener() {
+        @Override
+        public void onDateTimeSet(Date date) {
+            Intent intent = new Intent(mContext, AlarmReceiver.class);
+            intent.setAction(Constant.ACTION_ALARM);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, 0,
+                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            AlarmManager am = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+            am.set(AlarmManager.RTC_WAKEUP, date.getTime(), pendingIntent);
+            Toast.makeText(mContext, "闹钟将在" + DateUtils.date2Str(date, "MM-dd HH:mm")
+                    + "发出提醒", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onDateTimeCancel() {
+
+        }
+    };
+
+    @OnClick({R.id.ll_me_user, R.id.ll_me_reminder, R.id.ll_me_share,
             R.id.ll_me_about, R.id.ll_me_check, R.id.ll_me_init})
     public void mineClick(View view) {
         switch (view.getId()) {
@@ -95,9 +115,14 @@ public class MineFragment extends BaseFragment {
                 startActivityForResult(new Intent(mContext, UserActivity.class), UPDATE_USER);
             }
             break;
-            case R.id.ll_me_setting:
-            break;
-            case R.id.ll_me_reminder:
+            case R.id.ll_me_reminder: {
+                new SlideDateTimePicker.Builder(mContext.getSupportFragmentManager())
+                        .setListener(listener)
+                        .setIs24HourTime(true)
+                        .setIndicatorColor(Color.parseColor("#f6a844"))
+                        .build()
+                        .show();
+            }
             break;
             case R.id.ll_me_init: {
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);

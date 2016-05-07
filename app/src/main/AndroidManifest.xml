@@ -72,6 +72,12 @@
         </activity>
         <activity android:name=".activity.InvestActivity">
         </activity>
+
+        <receiver
+            android:name=".receiver.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true">
+        </receiver>
     </application>
 
 </manifest>
