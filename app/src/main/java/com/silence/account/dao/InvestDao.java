@@ -20,6 +20,7 @@ public class InvestDao {
         mDao = DBOpenHelper.getInstance(context).getDao(Invest.class);
     }
 
+    //添加投资
     public boolean addInvest(Invest invest) {
         int row = 0;
         try {
@@ -30,26 +31,7 @@ public class InvestDao {
         return row > 0;
     }
 
-    public boolean deleteInvest(Invest invest) {
-        int row = 0;
-        try {
-            row = mDao.delete(invest);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return row > 0;
-    }
-
-    public boolean updateInvest(Invest invest) {
-        int row = 0;
-        try {
-            row = mDao.update(invest);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return row > 0;
-    }
-
+    //查询所有投资
     public List<Invest> findAllInvest() {
         List<Invest> invests = null;
         try {
@@ -60,10 +42,11 @@ public class InvestDao {
         return invests;
     }
 
-    public List<Invest> findInvest(Date start, Date end,int userId) {
+    //查询指定周期的投资
+    public List<Invest> findInvest(Date start, Date end, int userId) {
         List<Invest> invests = null;
         try {
-            invests = mDao.queryBuilder().where().between("ASdate", start, end).and().eq("ASuserId",userId).query();
+            invests = mDao.queryBuilder().where().between("ASdate", start, end).and().eq("ASuserId", userId).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

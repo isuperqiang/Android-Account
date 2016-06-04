@@ -22,6 +22,7 @@ public class IncomeCatDao {
         mDao = DBOpenHelper.getInstance(context).getDao(IncomeCat.class);
     }
 
+    //根据编号查询类别
     public List<IncomeCat> getIncomeCat(int userId) {
         List<IncomeCat> cats = null;
         try {
@@ -32,6 +33,7 @@ public class IncomeCatDao {
         return cats;
     }
 
+    //添加类别
     public boolean addCategory(IncomeCat incomeCat) {
         int row = 0;
         try {
@@ -42,6 +44,7 @@ public class IncomeCatDao {
         return row > 0;
     }
 
+    //修改类别
     public boolean update(IncomeCat incomeCat) {
         int row = 0;
         try {
@@ -52,6 +55,7 @@ public class IncomeCatDao {
         return row > 0;
     }
 
+    //删除类别
     public boolean delete(IncomeCat incomeCat) {
         int row = 0;
         try {

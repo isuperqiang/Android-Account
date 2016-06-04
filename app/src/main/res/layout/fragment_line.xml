@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical"
+              android:padding="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_select_date"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        >
+
+        <ImageView
+            android:id="@+id/icon_line_chart_left"
+            android:layout_width="24dp"
+            android:layout_height="18dp"
+            android:paddingBottom="2dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp"
+            android:src="@mipmap/baobiao_zuo"/>
+
+        <TextView
+            android:id="@+id/label_line_date_chart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2016年"
+            android:textSize="18sp"
+            />
+
+        <ImageView
+            android:id="@+id/icon_line_chart_right"
+            android:layout_width="24dp"
+            android:layout_height="18dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="2dp"
+            android:src="@mipmap/baobiao_you"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="#33B5E5"
+                    android:gravity="center"
+                    android:text="收入"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="#AA66CC"
+                    android:gravity="center"
+                    android:text="支出"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="#99CC00"
+                    android:gravity="center"
+                    android:text="结余"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    />
+            </LinearLayout>
+
+            <lecho.lib.hellocharts.view.LineChartView
+                android:id="@+id/line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:layout_marginTop="4dp"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/bg_select_date"
+                android:orientation="horizontal"
+                >
+
+                <TextView
+                    style="@style/text_line_chart_list_header"
+                    android:text="@string/month"
+                    />
+
+                <TextView
+                    style="@style/text_line_chart_list_header"
+                    android:text="@string/income"
+                    />
+
+                <TextView
+                    style="@style/text_line_chart_list_header"
+                    android:text="@string/expense"
+                    />
+
+                <TextView
+                    style="@style/text_line_chart_list_header"
+                    android:text="@string/balance"
+                    />
+            </LinearLayout>
+
+            <com.silence.account.view.NoScrollListView
+                android:id="@+id/list_line_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:headerDividersEnabled="true"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

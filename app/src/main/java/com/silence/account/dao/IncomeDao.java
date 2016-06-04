@@ -29,6 +29,7 @@ public class IncomeDao {
         mDao = DBOpenHelper.getInstance(context).getDao(Income.class);
     }
 
+    //添加收入信息
     public boolean addIncome(Income income) {
         int row = 0;
         try {
@@ -39,6 +40,7 @@ public class IncomeDao {
         return row > 0;
     }
 
+    //修改收入信息
     public boolean updateIncome(Income income) {
         int row = 0;
         try {
@@ -49,6 +51,18 @@ public class IncomeDao {
         return row > 0;
     }
 
+    //删除收入信息
+    public boolean deleteExpense(Income income) {
+        int row = 0;
+        try {
+            row = mDao.delete(income);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return row > 0;
+    }
+
+    //查询指定周期的收入总和
     public float getPeriodSumIncome(Date start, Date end, int userId) {
         List<Income> incomes = getPeriodIncomes(start, end, userId);
         float sum = 0;
@@ -60,6 +74,7 @@ public class IncomeDao {
         return sum;
     }
 
+    //按类别统计指定周期的收入情况
     public List<IncomeStatistics> getPeriodCatSumExpense(Date start, Date end, int userId) {
         List<IncomeStatistics> incomeStatisticses = null;
         String sql = "select ASincomeCat.ASname, ASincomeCat.ASimage, sum(ASamount) sumCatIncome from ASincome " +
@@ -82,6 +97,7 @@ public class IncomeDao {
         return incomeStatisticses;
     }
 
+    //查询指定周期的所有收入
     public List<Income> getPeriodIncomes(Date start, Date end, int userId) {
         List<Income> incomes = null;
         try {
@@ -90,15 +106,5 @@ public class IncomeDao {
             e.printStackTrace();
         }
         return incomes;
-    }
-
-    public boolean deleteExpense(Income income) {
-        int row = 0;
-        try {
-            row = mDao.delete(income);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return row > 0;
     }
 }

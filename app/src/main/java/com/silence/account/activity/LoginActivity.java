@@ -15,7 +15,6 @@ import com.silence.account.dao.ExpenseCatDao;
 import com.silence.account.dao.IncomeCatDao;
 import com.silence.account.dao.UserDao;
 import com.silence.account.pojo.User;
-import com.silence.account.utils.L;
 import com.silence.account.utils.MD5Encrypt;
 import com.silence.account.utils.NetUtils;
 import com.silence.account.utils.T;
@@ -82,17 +81,14 @@ public class LoginActivity extends BaseActivity {
                                                         download(user.getPicture(), new DownloadListener() {
                                                             @Override
                                                             public void onSuccess(String fullPath) {
-                                                                L.i("下载成功：" + fullPath);
                                                             }
 
                                                             @Override
                                                             public void onProgress(String localPath, int percent) {
-                                                                L.i("download-->onProgress :" + percent);
                                                             }
 
                                                             @Override
                                                             public void onError(int statuscode, String errormsg) {
-                                                                L.i("下载出错：" + statuscode + "--" + errormsg);
                                                             }
                                                         });
                                             }

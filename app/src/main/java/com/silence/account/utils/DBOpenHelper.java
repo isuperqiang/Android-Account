@@ -27,22 +27,20 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
     private static DBOpenHelper sDBOpenHelper;
     private Map<String, Dao> mDaoMap;
 
-    public static DBOpenHelper getInstance(Context context) {
-        if (sDBOpenHelper == null) {
-            synchronized (DBOpenHelper.class) {
-                if (sDBOpenHelper == null) {
-                    sDBOpenHelper = new DBOpenHelper(context.getApplicationContext());
-                }
-            }
-        }
-        return sDBOpenHelper;
-    }
-
     public DBOpenHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         mDaoMap = new HashMap<>();
     }
 
+    //获取数据库连接，采用单例模式
+    public static DBOpenHelper getInstance(Context context) {
+        if (sDBOpenHelper == null) {
+            sDBOpenHelper = new DBOpenHelper(context.getApplicationContext());
+        }
+        return sDBOpenHelper;
+    }
+
+    //清空数据表
     public void dropTable() {
         SQLiteDatabase database = sDBOpenHelper.getWritableDatabase();
         database.execSQL("delete from ASuser;");
@@ -53,6 +51,7 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
         database.execSQL("delete from ASinvest;");
     }
 
+    //创数据库
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource) {
         try {
@@ -67,8 +66,11 @@ public class DBOpenHelper extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    //数据库升级
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, ConnectionSource connectionSource, int i, int i1) {
+        sqLiteDatabase.execSQL("drop table if exists ASaccount;");
+        onCreate(sqLiteDatabase, connectionSource);
     }
 
     @Override

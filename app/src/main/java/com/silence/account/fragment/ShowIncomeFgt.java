@@ -1,6 +1,6 @@
 package com.silence.account.fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -57,10 +57,10 @@ public class ShowIncomeFgt extends ListFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onIncomeChangeListener) {
-            mOnIncomeChangeListener = (onIncomeChangeListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof onIncomeChangeListener) {
+            mOnIncomeChangeListener = (onIncomeChangeListener) activity;
         }
     }
 
@@ -97,6 +97,8 @@ public class ShowIncomeFgt extends ListFragment {
                 break;
         }
         setListAdapter(mIncomeSwipeAdapter);
+
+ 	//创建菜单项，设置文字、图标、宽度、背景等属性
         SwipeMenuCreator creator = new SwipeMenuCreator() {
             @Override
             public void create(SwipeMenu menu) {
@@ -108,10 +110,13 @@ public class ShowIncomeFgt extends ListFragment {
             }
         };
         mListFinance.setMenuCreator(creator);
+	//为菜单项设置点击监听事件
         mListFinance.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                if (mIncomeDao.deleteExpense((Income) mIncomeSwipeAdapter.getItem(mIncomes.size() - 1 - position))) {
+		//如果删除成功，刷新数据，重绘界面
+                if (mIncomeDao.deleteExpense((Income) mIncomeSwipeAdapter.getItem(mIncomes.size()
+		    - 1 - position))) {
                     T.showShort(getActivity(), "删除成功");
                     mIncomes.remove(mIncomes.size() - 1 - position);
                     mIncomeSwipeAdapter.setData(mIncomes);

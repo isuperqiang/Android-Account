@@ -1,6 +1,6 @@
 package com.silence.account.fragment;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -56,10 +56,10 @@ public class ShowExpenseFgt extends ListFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onExpenseChangeListener) {
-            mOnExpenseChangeListener = (onExpenseChangeListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof onExpenseChangeListener) {
+            mOnExpenseChangeListener = (onExpenseChangeListener) activity;
         }
     }
 

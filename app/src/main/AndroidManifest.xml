@@ -39,7 +39,7 @@
         </activity>
         <activity android:name=".activity.RecordActivity">
         </activity>
-        <activity android:name=".activity.AddCategoryAty">
+        <activity android:name=".activity.CategoryAty">
         </activity>
         <activity android:name=".activity.ItemActivity">
         </activity>

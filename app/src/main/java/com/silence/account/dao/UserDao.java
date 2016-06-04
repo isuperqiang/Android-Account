@@ -22,6 +22,7 @@ public class UserDao {
         mDao = mDbOpenHelper.getDao(User.class);
     }
 
+    //获取当前用户
     public User getCurrentUser(String username) {
         List<User> users = null;
         try {
@@ -32,6 +33,7 @@ public class UserDao {
         return users != null && users.size() > 0 ? users.get(0) : null;
     }
 
+    //新用户登录
     public void addUser(User user) {
         try {
             mDao.create(user);
@@ -40,12 +42,14 @@ public class UserDao {
         }
     }
 
+    //修改用户名
     public void updatePass(String pass, int id) {
         SQLiteDatabase database = mDbOpenHelper.getWritableDatabase();
         String sql = "update ASuser set ASpassword=? where ASid=?;";
         database.execSQL(sql, new Object[]{pass, id});
     }
 
+    //修改密码
     public void updateName(String name, int id) {
         SQLiteDatabase database = mDbOpenHelper.getWritableDatabase();
         String sql = "update ASuser set ASemail=? where ASid=?;";

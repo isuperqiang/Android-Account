@@ -38,12 +38,16 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @OnClick(R.id.btn_register)
+    //注册按钮，执行的操作
     public void registerClick() {
+        //获取输入框中用户输入的信息
         final String name = mRegUsername.getText().toString().trim();
         final String pass = mRegPass.getText().toString().trim();
         final String email = mRegEmail.getText().toString().trim();
         if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(email)) {
+            //检测邮箱号是否符合格式
             if (StringUtils.checkEmail(email)) {
+                //开启异步线程，避免阻塞UI主线程
                 new Thread(new Runnable() {
                     @Override
                     public void run() {

@@ -63,10 +63,14 @@ public class PieIncomeFgt extends BaseFragment implements
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_pie, container, false);
         ButterKnife.bind(this, view);
+
+	//创建饼状图并设置图标颜色、文字颜色、字体大小、中心文字等属性。
         mPieChartData.setHasCenterCircle(true);
-        mPieChartData.setCenterText1FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+        mPieChartData.setCenterText1FontSize(ChartUtils.px2sp(getResources().
+	getDisplayMetrics().scaledDensity,
                 (int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
-        mPieChartData.setCenterText2FontSize(ChartUtils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+        mPieChartData.setCenterText2FontSize(ChartUtils.px2sp(getResources().
+	getDisplayMetrics().scaledDensity,
                 (int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
         mPieChartData.setCenterText1Color(getResources().getColor(R.color.gray_holo_dark));
         mPieChartData.setCenterText2Color(getResources().getColor(R.color.gray_holo_dark));
@@ -75,6 +79,7 @@ public class PieIncomeFgt extends BaseFragment implements
         mPieChartData.setHasLabelsOnlyForSelected(false);
         mPieChart.setValueSelectionEnabled(true);
         mPieChart.setCircleFillRatio(1.0f);
+
         updateData(DateUtils.getMonthStart(mYear, mMonth), DateUtils.getMonthEnd(mYear, mMonth));
         return view;
     }

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
@@ -24,7 +25,7 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.silence.account.R;
-import com.silence.account.activity.AddCategoryAty;
+import com.silence.account.activity.CategoryAty;
 import com.silence.account.application.AccountApplication;
 import com.silence.account.adapter.GridInCatAdapter;
 import com.silence.account.dao.IncomeCatDao;
@@ -84,12 +85,12 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onTimePickListener) {
-            mOnTimePickListener = (onTimePickListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof onTimePickListener) {
+            mOnTimePickListener = (onTimePickListener) activity;
         }
-        mContext = getActivity();
+        mContext = activity;
     }
 
     @Override
@@ -116,10 +117,14 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
             mIncome.setCategory((IncomeCat) mCatAdapter.getItem(0));
         }
         mEtIncomeTime.setText(DateUtils.date2Str(mDate));
-        LinearLayout linearLayout = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.pop_category, null);
+
+        //绘制弹出页的界面
+        LinearLayout linearLayout = (LinearLayout) getActivity().getLayoutInflater().
+                inflate(R.layout.pop_category, null);
         GridView gridIncomeCat = (GridView) linearLayout.findViewById(R.id.grid_category);
         gridIncomeCat.setAdapter(mCatAdapter);
         gridIncomeCat.setOnItemClickListener(this);
+        //为类别图标设置点击监听事件，点击的时候设置账目的类别
         gridIncomeCat.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -129,16 +134,18 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
                 return false;
             }
         });
+        //为类别图标设置长按监听事件，长按的时候进入修改类别的界面
         gridIncomeCat.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 IncomeCat incomeCat = (IncomeCat) mCatAdapter.getItem(position);
-                Intent intent = new Intent(mContext, AddCategoryAty.class);
+                Intent intent = new Intent(mContext, CategoryAty.class);
                 intent.putExtra(Constant.UPDATE_CAT, incomeCat);
                 startActivityForResult(intent, REQUEST_UPDATE_CATEGORY);
                 return true;
             }
         });
+        //创建弹出式对话框，让用户管理收支类别
         mPopupWindow = new PopupWindow(linearLayout, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, true);
         mPopupWindow.setBackgroundDrawable(new ColorDrawable(0xb0000000));
@@ -180,7 +187,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         IncomeCat incomeCat = (IncomeCat) parent.getItemAtPosition(position);
         if (incomeCat.getImageId() == R.mipmap.jiahao_bai) {
-            Intent intent = new Intent(mContext, AddCategoryAty.class);
+            Intent intent = new Intent(mContext, CategoryAty.class);
             intent.putExtra(Constant.TYPE_CATEGORY, Constant.TYPE_INCOME);
             startActivityForResult(intent, REQUEST_ADD_CATEGORY);
         } else if (incomeCat.getImageId() == R.mipmap.jianhao_bai) {
@@ -254,7 +261,11 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
 
     private void saveIncome() {
         String trim = mEtIncome.getText().toString().trim();
-        float amount = Float.parseFloat(TextUtils.isEmpty(trim) ? "0" : trim);
+        if (TextUtils.isEmpty(trim)) {
+            Toast.makeText(mContext, "请输入金额", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        float amount = Float.parseFloat(trim);
         String note = mEtIncomeNote.getText().toString().trim();
         mIncome.setAmount(amount);
         mIncome.setNote(note);

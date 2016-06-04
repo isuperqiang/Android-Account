@@ -9,9 +9,9 @@ public interface Constant {
     String TYPE_CATEGORY = "type_category";
     String TYPE_INCOME = "com.silence.pojo.income";
     String TYPE_EXPENSE = "com.silence.pojo.expense";
-    int TYPE_TODAY = 0x1;
-    int TYPE_WEEK = 0x2;
-    int TYPE_MONTH = 0x3;
+    int TYPE_TODAY = 0x101;
+    int TYPE_WEEK = 0x202;
+    int TYPE_MONTH = 0x303;
     String TYPE_DATE = "date type";
     String RECORD = "modify record";
     int REQUEST_UPDATE_FINANCE = 0X100;

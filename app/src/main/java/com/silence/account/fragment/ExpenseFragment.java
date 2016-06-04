@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
@@ -24,7 +25,7 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
 import com.silence.account.R;
-import com.silence.account.activity.AddCategoryAty;
+import com.silence.account.activity.CategoryAty;
 import com.silence.account.application.AccountApplication;
 import com.silence.account.adapter.GridExpCatAdapter;
 import com.silence.account.dao.ExpenseCatDao;
@@ -86,12 +87,12 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof onTimePickListener) {
-            mOnTimePickListener = (onTimePickListener) context;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof onTimePickListener) {
+            mOnTimePickListener = (onTimePickListener) activity;
         }
-        mContext = getActivity();
+        mContext = activity;
     }
 
     @Override
@@ -136,7 +137,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 ExpenseCat expenseCat = (ExpenseCat) mCatAdapter.getItem(position);
-                Intent intent = new Intent(mContext, AddCategoryAty.class);
+                Intent intent = new Intent(mContext, CategoryAty.class);
                 intent.putExtra(Constant.UPDATE_CAT, expenseCat);
                 startActivityForResult(intent, REQUEST_UPDATE_CATEGORY);
                 return true;
@@ -184,7 +185,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ExpenseCat expenseCat = (ExpenseCat) parent.getItemAtPosition(position);
         if (expenseCat.getImageId() == R.mipmap.jiahao_bai) {
-            Intent intent = new Intent(mContext, AddCategoryAty.class);
+            Intent intent = new Intent(mContext, CategoryAty.class);
             intent.putExtra(Constant.TYPE_CATEGORY, Constant.TYPE_EXPENSE);
             startActivityForResult(intent, REQUEST_ADD_CATEGORY);
         } else if (expenseCat.getImageId() == R.mipmap.jianhao_bai) {
@@ -263,7 +264,11 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
 
     private void saveExpense() {
         String trim = mEtExpense.getText().toString().trim();
-        float amount = Float.parseFloat(TextUtils.isEmpty(trim) ? "0" : trim);
+        if (TextUtils.isEmpty(trim)) {
+            Toast.makeText(mContext, "请输入金额", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        float amount = Float.parseFloat(trim);
         String note = mEtExpenseNote.getText().toString().trim();
         mExpense.setAmount(amount);
         mExpense.setNote(note);

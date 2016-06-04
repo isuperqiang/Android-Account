@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:text="更多"
+        android:textSize="18sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="4dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <RadioGroup
+        android:id="@+id/radio_group_chart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        >
+
+        <RadioButton
+            android:id="@+id/radio_pop_line"
+            style="@style/pop_chart"
+            android:drawableTop="@drawable/btn_chart_line"
+            android:text="趋势统计"/>
+
+        <RadioButton
+            android:id="@+id/radio_pop_pie"
+            style="@style/pop_chart"
+            android:checked="true"
+            android:drawableTop="@drawable/btn_chart_pie"
+            android:text="分类统计"
+            />
+    </RadioGroup>
+
+</LinearLayout>

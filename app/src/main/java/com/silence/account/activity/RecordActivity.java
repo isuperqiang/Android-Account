@@ -89,6 +89,8 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
 
             }
         };
+
+	//创建日期选择对话框，设置初始时间日期、是否24小时制、指示器颜色等属性。
         new SlideDateTimePicker.Builder(mFragmentManager)
                 .setListener(listener)
                 .setInitialDate(date)
