@@ -1,1 +1,6 @@
-include ':app', ':slidedatetimepicker', ':sharesdk', ':onekeyshare', ':pagerslidingtabstrip', ':swipemenulistview', ':daterangepicker'
+include ':account'
+include ':sharesdk'
+include ':onekeyshare'
+include ':daterangepicker'
+include ':pagerslidingtabstrip'
+include ':slidedatetimepicker'
