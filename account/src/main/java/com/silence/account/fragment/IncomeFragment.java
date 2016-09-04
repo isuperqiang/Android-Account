@@ -158,7 +158,7 @@ public class IncomeFragment extends BaseFragment implements AdapterView.OnItemCl
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

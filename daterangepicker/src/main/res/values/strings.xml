@@ -72,4 +72,5 @@
     <string name="mdtp_day_of_week_label_typeface" translatable="false">sans-serif</string>
     <string name="mdtp_from">FROM</string>
     <string name="mdtp_to">TO</string>
+    <string name="text_copyright">Copyright @2016-2023 Silence All Rights Reserved</string>
 </resources>

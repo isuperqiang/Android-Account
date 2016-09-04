@@ -82,7 +82,7 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

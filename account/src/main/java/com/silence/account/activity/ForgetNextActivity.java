@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,6 +31,11 @@ public class ForgetNextActivity extends BaseActivity {
         String hintLabel = "<p>没有收到验证邮件？<br/>&bull; 有可能被误判为垃圾邮件<br/>&bull; 若超过20分钟仍无法接收邮件，请重新提交申请。</p>";
         mLabelSendEmail.setText(Html.fromHtml(validateLabel));
         mLabelHintEmail.setText(Html.fromHtml(hintLabel));
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @OnClick(R.id.btn_validate)

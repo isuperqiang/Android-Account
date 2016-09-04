@@ -155,7 +155,7 @@ public class ExpenseFragment extends BaseFragment implements AdapterView.OnItemC
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

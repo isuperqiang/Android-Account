@@ -84,7 +84,7 @@ public class PieFragment extends BaseFragment {
     }
 
     @Override
-    protected BaseFragment getViewRoot() {
+    protected BaseFragment getSubFragment() {
         return this;
     }
 }

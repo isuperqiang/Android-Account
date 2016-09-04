@@ -83,7 +83,7 @@ public class PieExpenseFgt extends BaseFragment implements DatePickerDialog.OnDa
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

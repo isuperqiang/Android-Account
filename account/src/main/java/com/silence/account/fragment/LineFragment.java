@@ -189,7 +189,7 @@ public class LineFragment extends BaseFragment {
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 }

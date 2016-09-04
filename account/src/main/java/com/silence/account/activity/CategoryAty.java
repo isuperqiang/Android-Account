@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -23,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Silence on 2016/3/10.
@@ -44,15 +44,13 @@ public class CategoryAty extends BaseActivity implements AdapterView.OnItemClick
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        ButterKnife.bind(this);
-        setTitle("添加类别");
+        setTitle(getString(R.string.add_category));
         showBackwardView(true);
         showForwardView(true);
         setContentView(R.layout.activity_category);
-        ButterKnife.bind(this);
         Parcelable extra = getIntent().getParcelableExtra(Constant.UPDATE_CAT);
         if (extra != null) {
-            setTitle("修改类别");
+            setTitle(getString(R.string.modify_category));
             if (extra instanceof ExpenseCat) {
                 mType = Constant.TYPE_EXPENSE;
                 mExpenseCat = (ExpenseCat) extra;
@@ -69,7 +67,7 @@ public class CategoryAty extends BaseActivity implements AdapterView.OnItemClick
         } else {
             mResId = R.mipmap.icon_shouru_type_qita;
             mType = getIntent().getStringExtra(Constant.TYPE_CATEGORY);
-            setTitle("添加类别");
+            setTitle(getString(R.string.add_category));
         }
         CommonAdapter commonAdapter = new CommonAdapter<Integer>(initData(), R.layout.item_add_category) {
             @Override
@@ -122,55 +120,60 @@ public class CategoryAty extends BaseActivity implements AdapterView.OnItemClick
     @Override
     protected void onForward() {
 
-	//获取类别名称
+        //获取类别名称
         String name = mEtAddCategory.getText().toString().trim();
         if (!TextUtils.isEmpty(name)) {
             if (TextUtils.equals(mType, Constant.TYPE_INCOME)) {
                 IncomeCatDao incomeCatDao = new IncomeCatDao(this);
                 if (mIncomeCat != null) {
-	//如果更新成功，提示用户成功，并关闭窗口
+                    //如果更新成功，提示用户成功，并关闭窗口
                     if (incomeCatDao.update(new IncomeCat(mIncomeCat.getId(),
-	 name, mResId, AccountApplication.sUser))) {
-                        T.showShort(this, "修改成功");
+                            name, mResId, AccountApplication.sUser))) {
+                        T.showShort(this, getString(R.string.modify_succeed));
                         setResult(RESULT_OK);
                         finish();
                     } else {
-                        T.showShort(this, "修改失败");
+                        T.showShort(this, getString(R.string.modify_fail));
                     }
                 } else {
                     if (incomeCatDao.addCategory(new IncomeCat(mResId, name,
-	 AccountApplication.sUser))) {
-                        T.showShort(this, "保存成功");
+                            AccountApplication.sUser))) {
+                        T.showShort(this, getString(R.string.save_succeed));
                         setResult(RESULT_OK);
                         finish();
                     } else {
-                        T.showShort(this, "保存失败");
+                        T.showShort(this, getString(R.string.save_fail));
                     }
                 }
             } else if (TextUtils.equals(mType, Constant.TYPE_EXPENSE)) {
                 ExpenseCatDao expenseCatDao = new ExpenseCatDao(this);
                 if (mExpenseCat != null) {
                     if (expenseCatDao.update(new ExpenseCat(mExpenseCat.getId(),
-	 name, mResId, AccountApplication.sUser))) {
-                        T.showShort(this, "修改成功");
+                            name, mResId, AccountApplication.sUser))) {
+                        T.showShort(this, getString(R.string.modify_succeed));
                         setResult(RESULT_OK);
                         finish();
                     } else {
-                        T.showShort(this, "修改失败");
+                        T.showShort(this, getString(R.string.modify_fail));
                     }
                 } else {
                     if (expenseCatDao.addCategory(new ExpenseCat(mResId, name, AccountApplication.sUser))) {
-                        T.showShort(this, "保存成功");
+                        T.showShort(this, getString(R.string.save_succeed));
                         setResult(RESULT_OK);
                         finish();
                     } else {
-                        T.showShort(this, "保存失败");
+                        T.showShort(this, getString(R.string.save_fail));
                     }
                 }
             }
         } else {
-            T.showShort(this, "请填写类别名称");
+            T.showShort(this, getString(R.string.input_category_name));
         }
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.silence.account.R;
+
+import butterknife.ButterKnife;
 
 
 /**
@@ -33,6 +36,8 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mForwardButton = (ImageButton) findViewById(R.id.btn_top_forward);
         mForwardButton.setOnClickListener(this);
         mBackwardButton.setOnClickListener(this);
+
+
     }
 
     protected void showBackwardView(boolean show, int resId) {
@@ -108,6 +113,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mContentLayout.removeAllViews();
         View.inflate(this, layoutResId, mContentLayout);
         onContentChanged();
+        ButterKnife.bind(getSubActivity());
     }
 
     @Override
@@ -115,6 +121,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mContentLayout.removeAllViews();
         mContentLayout.addView(view);
         onContentChanged();
+        ButterKnife.bind(getSubActivity());
     }
 
     @Override
@@ -122,6 +129,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mContentLayout.removeAllViews();
         mContentLayout.addView(view, params);
         onContentChanged();
+        ButterKnife.bind(getSubActivity());
     }
 
     @Override
@@ -135,4 +143,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
                 break;
         }
     }
+
+    protected abstract Activity getSubActivity();
+
 }

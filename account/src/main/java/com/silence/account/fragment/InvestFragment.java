@@ -133,7 +133,7 @@ public class InvestFragment extends BaseFragment {
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -26,7 +27,6 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class RecordActivity extends BaseActivity implements IncomeFragment.onTimePickListener,
         ExpenseFragment.onTimePickListener {
@@ -43,8 +43,7 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
-        ButterKnife.bind(this);
-        setTitle("记账");
+        setTitle(getString(R.string.record_accout));
         showBackwardView(true);
         SpeechUtility.createUtility(getApplicationContext(), SpeechConstant.APPID + "=56de48c7");
         mFragmentManager = getSupportFragmentManager();
@@ -70,6 +69,11 @@ public class RecordActivity extends BaseActivity implements IncomeFragment.onTim
         mPagerRecord.setCurrentItem(index);
         mRecordTabStrip.setViewPager(mPagerRecord);
         mRecordTabStrip.setTextSize(ScreenUtils.dp2sp(this, 16));
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @Override

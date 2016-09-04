@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +15,6 @@ import com.silence.account.view.NormalEditText;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -33,9 +33,13 @@ public class ForgetPassActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_pass);
-        ButterKnife.bind(this);
-        setTitle("找回密码");
+        setTitle(getString(R.string.find_password));
         showBackwardView(true);
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @OnClick(R.id.btn_pass_next)
@@ -59,24 +63,24 @@ public class ForgetPassActivity extends BaseActivity {
 
                                 @Override
                                 public void onFailure(int i, String s) {
-                                    T.showShort(getApplicationContext(), "重置密码失败");
+                                    T.showShort(getApplicationContext(), getString(R.string.reset_pass_fail));
                                 }
                             });
                         } else {
-                            T.showShort(getApplicationContext(), "该邮箱未注册");
+                            T.showShort(getApplicationContext(), getString(R.string.unregister_email));
                         }
                     }
 
                     @Override
                     public void onError(int i, String s) {
-                        T.showShort(getApplicationContext(), "请检查网路连接是否开启");
+                        T.showShort(getApplicationContext(), getString(R.string.check_net_connect));
                     }
                 });
             } else {
-                T.showShort(this, "请输入正确的邮箱号码");
+                T.showShort(this, getString(R.string.input_right_email));
             }
         } else {
-            T.showShort(this, "请输入邮箱号码");
+            T.showShort(this, getString(R.string.input_email));
         }
     }
 

@@ -24,17 +24,17 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getResId(), container, false);
-        ButterKnife.bind(getViewRoot(), view);
+        ButterKnife.bind(getSubFragment(), view);
         return view;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ButterKnife.unbind(getViewRoot());
+        ButterKnife.unbind(getSubFragment());
     }
 
     protected abstract int getResId();
 
-    protected abstract Fragment getViewRoot();
+    protected abstract Fragment getSubFragment();
 }

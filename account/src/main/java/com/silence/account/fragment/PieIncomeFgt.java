@@ -88,7 +88,7 @@ public class PieIncomeFgt extends BaseFragment implements
     }
 
     @Override
-    protected Fragment getViewRoot() {
+    protected Fragment getSubFragment() {
         return this;
     }
 

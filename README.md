@@ -6,19 +6,17 @@
 
 (2) 类别管理：对收入和支出类别能够进行添加、修改和删除操作。
 
-(3) 收支管理：录入、修改和删除收入支出的各项信息。
+(3) 收支管理：记录、修改和删除收入支出的各项信息。
 
-(4) 查询统计：按照一定的周期对收入和支出的信息进行统计，利用饼图直观地反映一段时间的消费情况。
+(4) 查询统计：按照一定的周期对收入和支出的信息进行统计。
 
+(5) 个人中心：设置个人信息，
 
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-21-42_com.silence.accoun.png)
-
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-22-07_com.silence.accoun.png)
-
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-22-17_com.silence.accoun.png)
-
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-22-10_com.silence.accoun.png)
-
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-22-32_com.silence.accoun.png)
-
-![screenshot](https://github.com/isuperqiang/Account/blob/master/screenshot/Screenshot_2016-03-30-15-23-05_com.silence.accoun.png)
+<p>
+  <img src="screenshot/Screenshot_2016-03-30-15-21-42_com.silence.accoun.png" width="32%"/>
+  <img src="screenshot/Screenshot_2016-03-30-15-22-07_com.silence.accoun.png" width="32%"/>
+  <img src="screenshot/Screenshot_2016-03-30-15-22-17_com.silence.accoun.png" width="32%"/>
+  <img src="screenshot/Screenshot_2016-03-30-15-22-10_com.silence.accoun.png" width="32%"/>
+  <img src="screenshot/Screenshot_2016-03-30-15-22-32_com.silence.accoun.png" width="32%"/>
+  <img src="screenshot/Screenshot_2016-03-30-15-23-05_com.silence.accoun.png" width="32%"/>
+</p>

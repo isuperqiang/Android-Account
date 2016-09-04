@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +28,6 @@ import com.silence.account.view.CircleImageView;
 import java.io.File;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
@@ -52,8 +52,7 @@ public class UserActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        ButterKnife.bind(this);
-        setTitle("我的资料");
+        setTitle(getString(R.string.person_info));
         showBackwardView(true);
         mUsername.setText(BmobUser.getCurrentUser(this).getUsername());
         File photo = new File(BmobPro.getInstance(UserActivity.this).getCacheDownloadDir() +
@@ -134,6 +133,11 @@ public class UserActivity extends BaseActivity {
     }
 
     @Override
+    protected Activity getSubActivity() {
+        return this;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             if (requestCode == FROM_GALLERY || requestCode == CROP_PHOTO) {
@@ -147,7 +151,7 @@ public class UserActivity extends BaseActivity {
                                     new UploadListener() {
                                         @Override
                                         public void onSuccess(final String fileName, String url, BmobFile file) {
-                                            L.i("文件上传成功：" + fileName + ",可访问的文件地址：" + file.getUrl());
+//                                            L.i("文件上传成功：" + fileName + ",可访问的文件地址：" + file.getUrl());
                                             // fileName ：文件名（带后缀），这个文件名是唯一的，开发者需要记录下该文件名，
                                             // 方便后续下载或者进行缩略图的处理
                                             // url        ：文件地址
@@ -162,12 +166,12 @@ public class UserActivity extends BaseActivity {
                                                 @Override
                                                 public void onSuccess() {
                                                     mNewFileName = fileName;
-                                                    T.showShort(UserActivity.this, "头像修改成功");
+                                                    T.showShort(UserActivity.this, getString(R.string.upload_succeed));
                                                 }
 
                                                 @Override
                                                 public void onFailure(int i, String s) {
-                                                    T.showShort(UserActivity.this, "头像上传失败");
+                                                    T.showShort(UserActivity.this, getString(R.string.upload_fail));
                                                 }
                                             });
                                         }

@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -155,6 +156,11 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             mPopupWindow.showAtLocation(mRadioGpTab, Gravity.BOTTOM, 0, 0);
             showForwardView(true, R.mipmap.ic_arrow_up);
         }
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     private void initPopWindow() {

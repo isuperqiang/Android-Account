@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import com.silence.account.utils.T;
 import java.io.File;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
@@ -40,7 +40,6 @@ public class LoginActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ButterKnife.bind(this);
     }
 
     @OnClick({R.id.btn_login, R.id.label_register, R.id.label_forget})
@@ -48,7 +47,7 @@ public class LoginActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_login: {
                 if (!NetUtils.isConnected(this)) {
-                    T.showShort(this, "请检查网络是否连接");
+                    T.showShort(this, getString(R.string.check_net_connect));
                     return;
                 }
                 String name = mEtLoginName.getText().toString().trim();
@@ -105,12 +104,12 @@ public class LoginActivity extends BaseActivity {
                                     }
                                 }.execute();
                             } else {
-                                T.showShort(LoginActivity.this, "用户不存在或密码错误");
+                                T.showShort(LoginActivity.this, getString(R.string.error_user_login));
                             }
                         }
                     });
                 } else {
-                    T.showShort(this, "请输入用户名和密码");
+                    T.showShort(this, getString(R.string.input_user));
                 }
             }
             break;
@@ -121,6 +120,11 @@ public class LoginActivity extends BaseActivity {
                 startActivity(new Intent(this, ForgetPassActivity.class));
                 break;
         }
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
 }

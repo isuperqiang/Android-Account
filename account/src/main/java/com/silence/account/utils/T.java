@@ -17,8 +17,9 @@ public class T {
      * @param message
      */
     public static void showShort(Context context, CharSequence message) {
-        if (isShow)
+        if (isShow) {
             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -28,8 +29,9 @@ public class T {
      * @param message
      */
     public static void showShort(Context context, int message) {
-        if (isShow)
+        if (isShow) {
             Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -40,8 +42,9 @@ public class T {
      * @param duration
      */
     public static void show(Context context, CharSequence message, int duration) {
-        if (isShow)
+        if (isShow) {
             Toast.makeText(context.getApplicationContext(), message, duration).show();
+        }
     }
 
     /**
@@ -52,8 +55,9 @@ public class T {
      * @param duration
      */
     public static void show(Context context, int message, int duration) {
-        if (isShow)
+        if (isShow) {
             Toast.makeText(context.getApplicationContext(), message, duration).show();
+        }
     }
 
 }

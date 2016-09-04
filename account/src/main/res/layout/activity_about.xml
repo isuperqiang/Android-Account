@@ -24,10 +24,10 @@
         android:textSize="20sp"/>
 
     <TextView
+        android:id="@+id/tv_app_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="v1.0"
         android:textSize="16sp"/>
 
     <View
@@ -48,7 +48,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:gravity="left|center_vertical"
-            android:text="微信号"
+            android:text="@string/hint_wechat"
             android:textSize="16sp"/>
 
         <TextView
@@ -57,7 +57,7 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:paddingLeft="12dp"
-            android:text="qiang13702083997"
+            android:text="@string/author_wechat"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -78,7 +78,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:gravity="left|center_vertical"
-            android:text="反馈邮箱"
+            android:text="@string/hint_email"
             android:textSize="16sp"/>
 
         <TextView
@@ -87,7 +87,7 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:paddingLeft="12dp"
-            android:text="isuperqiang@gmail.com"
+            android:text="@string/author_email"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -99,7 +99,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:orientation="horizontal"
         android:padding="4dp"
         >
@@ -108,7 +108,7 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:gravity="left|center_vertical"
-            android:text="客服电话"
+            android:text="@string/hint_address"
             android:textSize="16sp"/>
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:paddingLeft="12dp"
-            android:text="13702083997"
+            android:text="@string/source_address"
             android:textSize="16sp"/>
     </LinearLayout>
 
@@ -133,6 +133,6 @@
         android:layout_gravity="bottom"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        android:text="Copyright @2016-2023 Silence All Rights Reserved"
+        android:text="@string/text_copyright"
         android:textSize="14sp"/>
 </LinearLayout>

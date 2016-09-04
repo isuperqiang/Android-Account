@@ -16,7 +16,6 @@ import com.silence.account.view.NormalEditText;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -32,10 +31,14 @@ public class NameActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name);
-        ButterKnife.bind(this);
-        setTitle("编辑昵称");
+        setTitle(getString(R.string.edit_name));
         showBackwardView(true);
         mEtModifyUsername.setText(BmobUser.getCurrentUser(this).getUsername());
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @OnClick(R.id.btn_modify_username)
@@ -51,7 +54,7 @@ public class NameActivity extends BaseActivity {
                         @Override
                         public void onSuccess(List<BmobUser> object) {
                             if (object.size() > 0) {
-                                T.showShort(NameActivity.this, "用户名已存在");
+                                T.showShort(NameActivity.this, getString(R.string.user_exist));
                             } else {
                                 BmobUser newUser = new BmobUser();
                                 newUser.setUsername(name);
@@ -59,7 +62,7 @@ public class NameActivity extends BaseActivity {
                                 newUser.update(NameActivity.this, bmobUser.getObjectId(), new UpdateListener() {
                                     @Override
                                     public void onSuccess() {
-                                        T.showShort(NameActivity.this, "更新用户名成功");
+                                        T.showShort(NameActivity.this, getString(R.string.update_user_succeed));
                                         new UserDao(NameActivity.this).updateName(name, AccountApplication.sUser.getId());
 //                                        EventBus.getDefault().post("update_name");
                                         AccountApplication.sUser.setName(name);
@@ -71,7 +74,7 @@ public class NameActivity extends BaseActivity {
 
                                     @Override
                                     public void onFailure(int code, String msg) {
-                                        T.showShort(NameActivity.this, "更新用户名失败");
+                                        T.showShort(NameActivity.this, getString(R.string.update_user_fail));
                                     }
                                 });
                             }
@@ -80,14 +83,14 @@ public class NameActivity extends BaseActivity {
                         //更新用户名
                         @Override
                         public void onError(int code, String msg) {
-                            T.showShort(NameActivity.this, "查询失败");
+                            T.showShort(NameActivity.this, getString(R.string.query_fail));
                         }
                     });
                     return null;
                 }
             }.execute();
         } else {
-            T.showShort(this, "请填写用户名");
+            T.showShort(this, getString(R.string.input_username));
         }
     }
 }

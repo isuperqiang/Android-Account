@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -13,7 +14,6 @@ import com.silence.account.utils.T;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
@@ -32,9 +32,13 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        ButterKnife.bind(this);
         setTitle(R.string.text_register);
         showBackwardView(true);
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @OnClick(R.id.btn_register)
@@ -57,7 +61,7 @@ public class RegisterActivity extends BaseActivity {
                             @Override
                             public void onSuccess(List<User> list) {
                                 if (list.size() > 0) {
-                                    T.showShort(getApplicationContext(), "该邮箱已注册");
+                                    T.showShort(getApplicationContext(), getString(R.string.email_exist));
                                 } else {
                                     User user = new User();
                                     user.setEmail(email);
@@ -67,13 +71,13 @@ public class RegisterActivity extends BaseActivity {
                                     user.signUp(RegisterActivity.this, new SaveListener() {
                                         @Override
                                         public void onSuccess() {
-                                            T.showShort(getApplicationContext(), "注册成功");
+                                            T.showShort(getApplicationContext(), getString(R.string.regiter_succeed));
                                             RegisterActivity.this.finish();
                                         }
 
                                         @Override
                                         public void onFailure(int i, String s) {
-                                            T.showShort(getApplicationContext(), "该用户名已被占用");
+                                            T.showShort(getApplicationContext(), getString(R.string.username_exist));
                                         }
                                     });
                                 }
@@ -81,17 +85,17 @@ public class RegisterActivity extends BaseActivity {
 
                             @Override
                             public void onError(int i, String s) {
-                                T.showShort(getApplicationContext(), "验证失败");
+                                T.showShort(getApplicationContext(), getString(R.string.verify_fail));
                             }
                         });
                     }
                 }).start();
 
             } else {
-                T.showShort(this, "请输入正确的邮箱号码");
+                T.showShort(this, getString(R.string.input_right_email));
             }
         } else {
-            T.showShort(this, "请填写完整信息");
+            T.showShort(this, getString(R.string.input_full_info));
         }
     }
 }

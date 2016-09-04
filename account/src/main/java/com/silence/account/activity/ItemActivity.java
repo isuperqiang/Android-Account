@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,7 +22,6 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.Date;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpenseChangeListener,
@@ -48,7 +48,6 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
-        ButterKnife.bind(this);
         showBackwardView(true);
         mFragmentManager = getSupportFragmentManager();
         IncomeDao incomeDao = new IncomeDao(this);
@@ -56,7 +55,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
         mType = getIntent().getIntExtra(Constant.TYPE_DATE, 0);
         switch (mType) {
             case Constant.TYPE_MONTH: {
-                setTitle("本月");
+                setTitle(getString(R.string.current_month));
                 Date start = DateUtils.getMonthStart();
                 Date end = DateUtils.getMonthEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
@@ -69,7 +68,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
             }
             break;
             case Constant.TYPE_TODAY: {
-                setTitle("今天");
+                setTitle(getString(R.string.today));
                 Date start = DateUtils.getTodayStart();
                 Date end = DateUtils.getTodayEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
@@ -82,7 +81,7 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
             }
             break;
             case Constant.TYPE_WEEK: {
-                setTitle("本周");
+                setTitle(getString(R.string.current_week));
                 Date start = DateUtils.getWeekStart();
                 Date end = DateUtils.getWeekEnd();
                 mIncome = incomeDao.getPeriodSumIncome(start, end, AccountApplication.sUser.getId());
@@ -95,6 +94,11 @@ public class ItemActivity extends BaseActivity implements ShowExpenseFgt.onExpen
             }
             break;
         }
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     private void hideAll(FragmentTransaction transaction) {

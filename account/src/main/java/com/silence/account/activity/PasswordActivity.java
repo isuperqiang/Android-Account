@@ -1,5 +1,6 @@
 package com.silence.account.activity;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +15,6 @@ import com.silence.account.view.PasswordEditText;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -32,9 +32,13 @@ public class PasswordActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password);
-        ButterKnife.bind(this);
-        setTitle("修改密码");
+        setTitle(getString(R.string.modify_password));
         showBackwardView(true);
+    }
+
+    @Override
+    protected Activity getSubActivity() {
+        return this;
     }
 
     @OnClick(R.id.btn_modify_pass)
